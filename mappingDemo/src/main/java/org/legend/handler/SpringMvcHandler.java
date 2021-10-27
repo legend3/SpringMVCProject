@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 都是指后台(Servlet组件环节)controller层
  */
 @Controller
+@RequestMapping(value="handler")
 public class SpringMvcHandler {
-    @RequestMapping("welcome")
+    @RequestMapping(value="welcome")
     public String welcome(){
         return "success";
     }
