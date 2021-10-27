@@ -80,7 +80,7 @@ url
 
 ## RequestMapping注解映射
 - 是去匹配@RequestMapping注解，可以和方法名、类名不一致  
-- 通过method指定请求方式(get  post  delete put):
+- 通过method指定请求方式(get  post  delete put):  
   - @RequestMapping(value="welcome",method=RequestMethod.POST)//映射  
   
 - 设置name="xxxx"的情况：
@@ -91,30 +91,26 @@ url
     - b.没有age
     !name2  ：不能name="name2"的属性
 
+      
+## ant风格的请求路径
+?  单字符  
+*  任意个字符（0或多个）  
+** 任意目录  
 
 
-
-
-ant风格的请求路径
-?  单字符
-*  任意个字符（0或多个）
-   ** 任意目录
-
-
-@RequestMapping(value="welcome3/**/test")
+- @RequestMapping(value="welcome3/**/test")
 接受示例：
+> a href="welcome3/abc/xyz/abccc/test"
 
-a href="welcome3/abc/xyz/abccc/test"
 
-
-通过@PathVariable获取动态参数
-public String  welcome5(@PathVariable("name") String name ) {
-System.out.println(name);
-return "success" ;
+- 通过@PathVariable获取动态参数  
+>public String  welcome5(@PathVariable("name") String name ) {    
+System.out.println(name);    
+return "success" ;  
 }
 
 
-REST风格 ：软件编程风格
+## REST风格 ：软件编程风格
 
 Springmvc:  
 GET  :查
