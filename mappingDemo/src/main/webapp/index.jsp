@@ -23,7 +23,7 @@
     <input type="submit" value="post"/>
 </form>
 
-<%--  四种请求方式，其中delete/put需要通过过滤器配置再处理  --%>
+<%--  rest风格——四种请求方式，其中delete/put需要通过过滤器配置再处理  --%>
 <form action="/mappingDemo/handler/testRest/1234" method="post">
     <input type="submit" value="增"/>
 </form>
@@ -38,6 +38,14 @@
 <form action="/mappingDemo/handler/testRest/1234" method="get">
     <input type="submit" value="查"/>
 </form>
+<%--  普通风格  --%>
+<form action="/mappingDemo/handler/testParam" method="get">
+    name:<input name="uname" type="text">
+<%--    age:<input name="uage" type="text">--%>
+    <input type="submit" value="查"/>
+</form>
+
+
 
 </body>
 </html>

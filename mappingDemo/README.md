@@ -125,7 +125,7 @@ return "success" ;
 
 
 ## REST风格 ：软件编程风格
-
+[restful风格](https://blog.csdn.net/qq_27026603/article/details/82012277)
 ### Springmvc(主要关注请求方式),四种请求方式:
 - GET  :查
 - POST  ：增
@@ -161,8 +161,8 @@ return "success" ;
 - 过滤的条件:
   - 必须是post方式
   - 通过隐藏域 的value值 设置实际的请求方式 DELETE|PUT
-  - return "test"; 这种方式是转发，而 DELETE 和 PUT 是不支持转发的，只支持重定向；
-  - 所以只需要将这行代码改为：return "redirect:/views/success.jsp"; ，就完成解决了.
+  - 无法转发的原因：
+    - return "success"; 这种方式是转发，而 DELETE 和 PUT 是不支持转发的，只支持重定向； 所以只需要将这行代码改为：return "redirect:/views/success.jsp"; ，就完成解决了.
 ![delete请求抓包图鉴](delete.png)
 
 3 .控制器
@@ -192,13 +192,15 @@ throws ServletException, IOException {
 		filterChain.doFilter(requestToUse, response);  
 	}  
 
-原始请求：request，改请求默认只支持get post  header
-但是如果 是"POST"  并且有隐藏域		<input type="hidden"  name="_method" value="DELETE"/>
-则，过滤器 将原始的请求 request加入新的请求方式DELETE，并将原始请求 转为 requestToUse 请求（request+Delete请求）
-最后将requestToUse 放入 请求链中， 后续再事情request时  实际就使用改造后的 requestToUse
+> 过滤器源码流程解析：  
+原始请求：request，改请求默认只支持get post  header  
+但是如果 是"POST"  并且有隐藏域		<input type="hidden"  name="_method" value="DELETE"/>  
+则，过滤器 将原始的请求 request加入新的请求方式DELETE，并将原始请求 转为 requestToUse 请求（request+Delete请求）  
+最后将requestToUse 放入 请求链中， 后续再使用request时  实际就使用改造后的 requestToUse  
 
+### 普通风格的传值
 @RequestParam("uname") String name,@RequestParam(value="uage",required=false,defaultValue="23")
-
+![普通风格传值](普通风格传值.png)
 @RequestParam("uname"):接受前台传递的值，等价于request.getParameter("uname");
 
 required=false:该属性 不是必须的。

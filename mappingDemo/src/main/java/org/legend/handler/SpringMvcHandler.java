@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //接口/类型 注解 配置
 /*
@@ -43,25 +44,33 @@ public class SpringMvcHandler {
         System.out.println("@PathVariable动态接收值：" + name);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
-
+    //rest风格
     @RequestMapping(value="testRest/{id}", method = RequestMethod.POST)
-    public String  welcome7(@PathVariable("id") Integer id) {
+    public String  testPost(@PathVariable("id") Integer id) {
         System.out.println("post值:" + id);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     @RequestMapping(value="testRest/{id}", method = RequestMethod.DELETE)
-    public String  welcome8(@PathVariable("id") Integer id) {
+    public String  testDelete(@PathVariable("id") Integer id) {
         System.out.println("delete值:" + id);
-        return "redirect:/views/success.jsp" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+        return "redirect:/views/success.jsp" ;//delete在Tomcat7以上都只能重定向，转发：405
     }
     @RequestMapping(value="testRest/{id}", method = RequestMethod.PUT)
-    public String  welcome9(@PathVariable("id") Integer id) {
+    public String  testPut(@PathVariable("id") Integer id) {
         System.out.println("put值:" + id);
-        return "redirect:/views/success.jsp" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+        return "redirect:/views/success.jsp" ;//put在Tomcat7以上都只能重定向，转发：405
     }
-    @RequestMapping(value="testRest/{id}", method = RequestMethod.GET)
-    public String  welcome6(@PathVariable("id") Integer id) {
+    @RequestMapping(value="testRest/{id}", method = RequestMethod.GET)//Restful风格传值用@PathVariable
+    public String  testGet(@PathVariable("id") Integer id) {
         System.out.println("get值:" + id);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    //普通风格
+    @RequestMapping(value="testParam")
+    public String  testParam(@RequestParam("uname") String name, @RequestParam(value = "uage", required = false, defaultValue = "23") Integer age) {//普通风格传值用@RequestParam
+//        String name = request.getParameter("uname");
+        System.out.println(name);
+        System.out.println(age);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
 }
