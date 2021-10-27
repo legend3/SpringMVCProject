@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/firstDemo/mappingDemo" />
-    <file type="web" url="file://$PROJECT_DIR$/firstDemo/out/artifacts/SpringMVC_war_exploded/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/firstDemo/out/artifacts/SpringMVCProject_war_exploded/WEB-INF/web.xml" />
     <file type="web" url="file://$PROJECT_DIR$/mappingDemo" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/firstDemo/pom.xml" />
         <option value="$PROJECT_DIR$/mappingDemo/pom.xml" />
       </list>
