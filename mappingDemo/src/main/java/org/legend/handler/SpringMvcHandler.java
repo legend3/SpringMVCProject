@@ -1,10 +1,7 @@
 package org.legend.handler;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 //接口/类型 注解 配置
 /*
@@ -65,12 +62,19 @@ public class SpringMvcHandler {
         System.out.println("get值:" + id);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
-    //普通风格
+    //普通风格-获取请求参数值
     @RequestMapping(value="testParam")
     public String  testParam(@RequestParam("uname") String name, @RequestParam(value = "uage", required = false, defaultValue = "23") Integer age) {//普通风格传值用@RequestParam
 //        String name = request.getParameter("uname");
         System.out.println(name);
         System.out.println(age);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    //普通风格-获取请求头信息
+    @RequestMapping(value="testRequestHeader")
+    public String  testHeader(@RequestHeader("Accept-Language") String AL) {//普通风格传值用@RequestParam
+//        String name = request.getParameter("uname");
+        System.out.println(AL);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
 }

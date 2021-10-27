@@ -44,7 +44,8 @@
 <%--    age:<input name="uage" type="text">--%>
     <input type="submit" value="查"/>
 </form>
-
+<%--  普通风格  --%>
+<a href="/mappingDemo/handler/testRequestHeader">获取请求头信息值</a>
 
 
 </body>
