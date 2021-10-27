@@ -75,8 +75,18 @@ url
   			<param-name>contextConfigLocation</param-name>
   			<param-value>classpath:springmvc.xml</param-value>
   	</init-param>
-指定springmvc配置文件的路径，如果要省略，必须放到 默认路径：    
-/WEB-INF/springDispatcherServlet-servlet.xml  
+指定springmvc配置文件的路径，如果要省略，必须放到 默认路径：
+/WEB-INF/servletname的值-servlet.xml
+
+> 现在是:(推荐)
+/WEB-INF/springDispatcherServlet-servlet.xml
+
+> 也可以改为，则<servlet-name>AAA</servlet-name>
+/WEB-INF/AAA-servlet.xml
+
+> <param-name>的值为org.springframework.web.servlet.DispatcherServlet中的contextConfigLocation属性
+
+
 
 ## RequestMapping注解映射
 - 是去匹配@RequestMapping注解，可以和方法名、类名不一致  
