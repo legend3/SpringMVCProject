@@ -72,7 +72,7 @@ public class SpringMvcHandler {
     }
     //普通风格-获取请求头信息
     @RequestMapping(value="testRequestHeader")
-    public String  testHeader(@RequestHeader("Accept-Language") String AL) {//普通风格传值用@RequestParam
+    public String  testHeader(@RequestHeader("Accept-Language") String AL) {//普通风格传Header用@RequestHeader
 //        String name = request.getParameter("uname");
         System.out.println(AL);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式

@@ -200,14 +200,13 @@ throws ServletException, IOException {
 
 ### 普通风格的传值
 @RequestParam("uname") String name,@RequestParam(value="uage",required=false,defaultValue="23")
+- 请求参数的数量>=方法获取数量
+- 
 ![普通风格传值](普通风格传值.png)
 @RequestParam("uname"):接受前台传递的值，等价于request.getParameter("uname");
 
 required=false:该属性 不是必须的。
 defaultValue="23"：默认值23
-
-
-
 
 
 获取请求头信息 @RequestHeader
