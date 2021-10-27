@@ -89,14 +89,18 @@ url
   - age!=23:
     - a.如果有name="age"，则age值不能是23
     - b.没有age
-    !name2  ：不能name="name2"的属性
+    !height  ：不能height"属性，否则不能拦截(接收)
 
+- 设置headers="xxx"的情况:
+  - 指定请求头中键值的值，否则不被接收
+    - @RequestMapping(value="welcome2", headers="Accept-Encoding=gzip, deflate, br")
+      - 接收示例：
+        > @RequestMapping(value="welcome2",headers= {"Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9","Accept-Encoding=gzip, deflate, br"})
       
 ## ant风格的请求路径
 ?  单字符  
-*  任意个字符（0或多个）  
-** 任意目录  
-
+* 任意个字符（0或多个）  
+** 任意目录   
 
 - @RequestMapping(value="welcome3/**/test")
 接受示例：
@@ -112,13 +116,14 @@ return "success" ;
 
 ## REST风格 ：软件编程风格
 
-Springmvc:  
-GET  :查
-POST  ：增
-DELETE ：删
-PUT ：改
+> Springmvc:  
 
-普通浏览器 只支持get post方式 ；其他请求方式 如 delelte|put请求是通过 过滤器新加入的支持。
+- GET  :查
+- POST  ：增
+- DELETE ：删
+- PUT ：改
+
+普通浏览器只支持get post方式；其他请求方式 如 delelte|put请求是通过 过滤器新加入的支持。
 
 springmvc实现 ：put|post请求方式的步骤
 a.增加过滤器
