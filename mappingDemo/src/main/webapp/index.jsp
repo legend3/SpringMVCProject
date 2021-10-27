@@ -16,15 +16,28 @@
 <br/>
 <a href="handler/welcome6/zs">666 welcome - welcome</a>
 <br/>
-
-
 <form action="/mappingDemo/handler/welcome" method="post">
     name:<input name="name" ><br/>
     age:<input name="age" >
 <%--    height:<input name="height" >--%>
-    <input type="submit" value="post">
+    <input type="submit" value="post"/>
 </form>
 
+<%--  四种请求方式，其中delete/put需要通过过滤器配置再处理  --%>
+<form action="/mappingDemo/handler/testRest/1234" method="post">
+    <input type="submit" value="增"/>
+</form>
+<form action="/mappingDemo/handler/testRest/1234" method="post">
+    <input type="hidden"  name="_method" value="DELETE"/>
+    <input type="submit" value="删"/>
+</form>
+<form action="/mappingDemo/handler/testRest/1234" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <input type="submit" value="改"/>
+</form>
+<form action="/mappingDemo/handler/testRest/1234" method="get">
+    <input type="submit" value="查"/>
+</form>
 
 </body>
 </html>

@@ -43,4 +43,25 @@ public class SpringMvcHandler {
         System.out.println("@PathVariable动态接收值：" + name);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
+
+    @RequestMapping(value="testRest/{id}", method = RequestMethod.POST)
+    public String  welcome7(@PathVariable("id") Integer id) {
+        System.out.println("post值:" + id);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testRest/{id}", method = RequestMethod.DELETE)
+    public String  welcome8(@PathVariable("id") Integer id) {
+        System.out.println("delete值:" + id);
+        return "redirect:/views/success.jsp" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testRest/{id}", method = RequestMethod.PUT)
+    public String  welcome9(@PathVariable("id") Integer id) {
+        System.out.println("put值:" + id);
+        return "redirect:/views/success.jsp" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testRest/{id}", method = RequestMethod.GET)
+    public String  welcome6(@PathVariable("id") Integer id) {
+        System.out.println("get值:" + id);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
 }

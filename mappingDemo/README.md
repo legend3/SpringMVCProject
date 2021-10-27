@@ -126,68 +126,72 @@ return "success" ;
 
 ## REST风格 ：软件编程风格
 
-> Springmvc:  
-
+### Springmvc(主要关注请求方式),四种请求方式:
 - GET  :查
 - POST  ：增
 - DELETE ：删
 - PUT ：改
+> 但是，普通浏览器只支持get post方式；其他请求方式 如,delelte|put请求是通过过滤器新加入的支持。
+> 补充:  
+> 为什么浏览器不支持DELETE和PUT？
+> 答：不安全
+> 当然，如果您正在编写RESTful服务，并且可以使用这些动词。
+> 
+![过滤处理delete/post请求](result.png)
 
-普通浏览器只支持get post方式；其他请求方式 如 delelte|put请求是通过 过滤器新加入的支持。
+### springmvc实现 ：put|post请求方式的步骤  
+1. 增加过滤器
+>
+        <!-- 增加HiddenHttpMethodFilte过滤器：目的是给普通浏览器 增加 put|delete请求方式 -->
+        <filter>  
+                <filter-name>HiddenHttpMethodFilte</filter-name>  
+                <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  
+        </filter>  
+        
+        <filter-mapping>  
+                <filter-name>HiddenHttpMethodFilte</filter-name>  
+                <url-pattern>/*</url-pattern>  
+        </filter-mapping>  
+2. 表单
+>
+    <form action="handler/testRest/1234" method="post">  
+         <input type="hidden"  name="_method" value="DELETE"/> 
+        <input type="submit" value="删">  
+    </form>  
+- 过滤的条件:
+  - 必须是post方式
+  - 通过隐藏域 的value值 设置实际的请求方式 DELETE|PUT
+  - return "test"; 这种方式是转发，而 DELETE 和 PUT 是不支持转发的，只支持重定向；
+  - 所以只需要将这行代码改为：return "redirect:/views/success.jsp"; ，就完成解决了.
+![delete请求抓包图鉴](delete.png)
 
-springmvc实现 ：put|post请求方式的步骤
-a.增加过滤器
-
-		<!-- 增加HiddenHttpMethodFilte过滤器：目的是给普通浏览器 增加 put|delete请求方式 -->
-	<filter>
-			<filter-name>HiddenHttpMethodFilte</filter-name>
-			<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	
-	</filter>
-	
-	<filter-mapping>
-			<filter-name>HiddenHttpMethodFilte</filter-name>
-			<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-b.表单
-
-	<form action="handler/testRest/1234" method="post">
-		<input type="hidden"  name="_method" value="DELETE"/>
-		<input type="submit" value="删">
-	</form>
-i:必须是post方式
-ii:通过隐藏域 的value值 设置实际的请求方式 DELETE|PUT
-
-c.控制器
-@RequestMapping(value="testRest/{id}",method=RequestMethod.DELETE)
-public String  testDelete(@PathVariable("id") Integer id) {
-System.out.println("delete：删 " +id);
-//Service层实现 真正的增
-return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
-}
-通过	method=RequestMethod.DELETE	匹配具体的请求方式
-
-
-
-此外，可以发现 ，当映射名相同时@RequestMapping(value="testRest)，可以通过method处理不同的请求。
+3 .控制器
+> @RequestMapping(value="testRest/{id}",method=RequestMethod.DELETE)  
+public String  testDelete(@PathVariable("id") Integer id) {  
+System.out.println("delete：删 " +id);  
+//Service层实现 真正的增  
+return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式  
+}  
+通过	method=RequestMethod.DELETE	匹配具体的请求方式  
 
 
-过滤器中 处理put|delete请求的部分源码：
-protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-throws ServletException, IOException {
 
-		HttpServletRequest requestToUse = request;
+>此外，可以发现 ，当映射名相同时@RequestMapping(value="testRest)，可以通过method处理不同的请求。  
 
-		if ("POST".equals(request.getMethod()) && request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == null) {
-			String paramValue = request.getParameter(this.methodParam);
-			if (StringUtils.hasLength(paramValue)) {
-				requestToUse = new HttpMethodRequestWrapper(request, paramValue);
-			}
+
+>过滤器中 处理put|delete请求的部分源码：  
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)  
+throws ServletException, IOException {  
+		HttpServletRequest requestToUse = request;  
+		if ("POST".equals(request.getMethod()) && request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == null) {  
+			String paramValue = request.getParameter(this.methodParam);  
+			if (StringUtils.hasLength(paramValue)) {  
+				requestToUse = new HttpMethodRequestWrapper(request, paramValue);  
+			}  
 		}
+		filterChain.doFilter(requestToUse, response);  
+	}  
 
-		filterChain.doFilter(requestToUse, response);
-	}
 原始请求：request，改请求默认只支持get post  header
 但是如果 是"POST"  并且有隐藏域		<input type="hidden"  name="_method" value="DELETE"/>
 则，过滤器 将原始的请求 request加入新的请求方式DELETE，并将原始请求 转为 requestToUse 请求（request+Delete请求）
