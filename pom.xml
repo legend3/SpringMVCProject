@@ -38,19 +38,24 @@
                 <artifactId>spring-beans</artifactId>
                 <version>5.3.9</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-            <!--        <dependency>-->
-            <!--            <groupId>org.springframework</groupId>-->
-            <!--            <artifactId>spring-web</artifactId>-->
-            <!--            <version>5.3.11</version>-->
-            <!--        </dependency>-->
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<!--             https://mvnrepository.com/artifact/org.springframework/spring-web -->
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                        <version>5.3.11</version>
+                    </dependency>
+<!--             https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
             <!--
                   Spring MVC已经作为一个单独的了项目拿出来了， 发布时没有加到SpringFrameWork里面，
                   这部分在spring-webmvc.jar这个jar中， 你加到classpath就可以了！ -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>5.3.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
                 <version>5.3.11</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->

@@ -44,9 +44,20 @@
 <%--    age:<input name="uage" type="text">--%>
     <input type="submit" value="查"/>
 </form>
-<%--  普通风格  --%>
+<%--  普通风格-获取请求头信息  --%>
 <a href="/mappingDemo/handler/testRequestHeader">获取请求头信息值</a>
+<br/>
+<a href="/mappingDemo/handler/testCookie">获取JSESSIONID</a>
 
+<form method="post" action="/mappingDemo/handler/testStudent">
+    <%--  属性必须和form表单中的属性Name值  --%>
+    学号：<input type="text" name="stuNo"/>
+    学生姓名：<input type="text" name="stuName"/>
+    <%--  且支持级联属性  --%>
+    学校地址：<input type="text" name="address.schoolAddress"/>
+    家庭地址：<input type="text" name="address.homeAddress"/>
+    <input type="submit" value="学生信息查询"/>
+</form>
 
 </body>
 </html>

@@ -199,27 +199,24 @@ throws ServletException, IOException {
 最后将requestToUse 放入 请求链中， 后续再使用request时  实际就使用改造后的 requestToUse  
 
 ### 普通风格的传值
-@RequestParam("uname") String name,@RequestParam(value="uage",required=false,defaultValue="23")
-- 请求参数的数量>=方法获取数量
-- 
-![普通风格传值](普通风格传值.png)
-@RequestParam("uname"):接受前台传递的值，等价于request.getParameter("uname");
-
-required=false:该属性 不是必须的。
+1. @RequestParam("uname") String name,@RequestParam(value="uage",required=false,defaultValue="23")
+  - 请求参数的数量>=方法获取数量
+  - 
+  - ![普通风格传值](普通风格传值.png)
+  - @RequestParam("uname"):接受前台传递的值，等价于request.getParameter("uname");
+>required=false:该属性 不是必须的。
 defaultValue="23"：默认值23
 
-
-获取请求头信息 @RequestHeader
+2. 获取请求头信息 @RequestHeader  
 public String  testRequestHeader(@RequestHeader("Accept-Language")  String al  ) {
 
 通过@RequestHeader("Accept-Language")  String al   获取请求头中的Accept-Language值，并将值保存再al变量中
 
-通过mvc获取cookie值（JSESSIONID）
-@CookieValue
+3. 通过mvc获取cookie值（JSESSIONID）  
+@CookieValue  
 (前置知识： 服务端在接受客户端第一次请求时，会给该客户端分配一个session （该session包含一个sessionId）),并且服务端会在第一次响应客户端时 ，请该sessionId赋值给JSESSIONID 并传递给客户端的cookie中
 
-
-小结：
+#### 小结：
 SpringMVC处理各种参数的流程/逻辑：
 请求：  前端发请求a-> @RequestMappting("a")
 处理请求中的参数xyz：
@@ -229,14 +226,14 @@ public String  aa(@Xxx注解("xyz")  xyz)
 
 	}
 
-使用对象（实体类Student）接受请求参数
+4. 使用对象（实体类Student）接受请求参数
 
-在SpringMVC中使用原生态的Servlet API  :HttpServletRequest ：直接将 servlet-api中的类、接口等 写在springMVC所映射的方法参数中即可：
-@RequestMapping(value="testServletAPI")
-public String testServletAPI(HttpServletRequest  request,HttpServletResponse response) {
-//			request.getParameter("uname") ;
-System.out.println(request);
-return "success" ;
+5. 在SpringMVC中使用原生态的Servlet API  :HttpServletRequest ：直接将 servlet-api中的类、接口等 写在springMVC所映射的方法参数中即可：  
+@RequestMapping(value="testServletAPI")  
+public String testServletAPI(HttpServletRequest  request,HttpServletResponse response) {  
+//			request.getParameter("uname") ;  
+System.out.println(request);  
+return "success" ;  
 }
 
 

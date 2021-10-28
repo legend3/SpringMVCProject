@@ -1,5 +1,6 @@
 package org.legend.handler;
 
+import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,6 +76,24 @@ public class SpringMvcHandler {
     public String  testHeader(@RequestHeader("Accept-Language") String AL) {//普通风格传Header用@RequestHeader
 //        String name = request.getParameter("uname");
         System.out.println(AL);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testCookie")
+    public String  testCookie(@CookieValue String JSESSIONID) {//普通风格传Header用@RequestHeader
+//        String name = request.getParameter("uname");
+        System.out.println(JSESSIONID);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testObjectProperties")
+    public String  testStudent(Student student) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
+//        String name = request.getParameter("uname");
+        System.out.println(student);
+        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+    }
+    @RequestMapping(value="testServletAPI")
+    public String  testStudent(httpServletRequest request, httpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
+//        String name = request.getParameter("uname");
+        System.out.println();
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
 }
