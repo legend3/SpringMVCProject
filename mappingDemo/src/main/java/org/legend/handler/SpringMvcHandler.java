@@ -1,8 +1,12 @@
 package org.legend.handler;
 
+
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 //接口/类型 注解 配置
 /*
@@ -91,9 +95,9 @@ public class SpringMvcHandler {
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     @RequestMapping(value="testServletAPI")
-    public String  testStudent(httpServletRequest request, httpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
+    public String  testServletAPI(HttpServletRequest request, HttpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
 //        String name = request.getParameter("uname");
-        System.out.println();
+        System.out.println(request);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
 }

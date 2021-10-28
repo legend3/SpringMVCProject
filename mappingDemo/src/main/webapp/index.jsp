@@ -58,6 +58,7 @@
     家庭地址：<input type="text" name="address.homeAddress"/>
     <input type="submit" value="学生信息查询"/>
 </form>
-
+</br>
+<a href="/mappingDemo/handler/testServletAPI">springmvc直接使用servletapi</a>
 </body>
 </html>
