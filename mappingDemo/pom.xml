@@ -63,11 +63,17 @@
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
     </dependency>
-<!--     https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-->
+<!--&lt;!&ndash;     https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>javax.servlet.jsp.jstl</groupId>-->
+<!--      <artifactId>jstl</artifactId>-->
+<!--    </dependency>-->
+<!--     https://mvnrepository.com/artifact/javax.servlet/jstl-->
     <dependency>
-      <groupId>javax.servlet.jsp.jstl</groupId>
+      <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/taglibs/standard -->
     <dependency>
       <groupId>taglibs</groupId>
