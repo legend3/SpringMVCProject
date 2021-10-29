@@ -74,5 +74,9 @@
     名字：<input name="stuName" type="text">
     <input type="submit" value="修改">
 </form>
+</br>
+<a href="/mappingDemo/handler/testI18n">测试国际化</a>
+
+
 </body>
 </html>

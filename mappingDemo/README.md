@@ -316,53 +316,53 @@ public String update()
 - 视图解析器：ViewResolver
 
 常见的视图和解析器：
-InternalResourceView(视图)、InternalResourceViewResolver(解析器)
+- InternalResourceView(视图)、InternalResourceViewResolver(解析器)
+  - public class JstlView extends InternalResourceView： 
+  - springMVC解析jsp时 会默认使用InternalResourceView， 
+  - 如果发现Jsp中包含了jstl语言相关的内容，则自动转为JstlView。
 
-public class JstlView extends InternalResourceView：
+- JstlView：InternalResourceView的一个子类
+  - JstlView 可以解析jstl(标签)\实现国际化操作
 
-springMVC解析jsp时 会默认使用InternalResourceView，
-如果发现Jsp中包含了jstl语言相关的内容，则自动转为JstlView。
+>国际化： 针对不同地区、不同国家 ，进行不同的显示 
+中国:（大陆、香港）     欢迎  
+美国：			welcome  
 
-
-JstlView：InternalResourceView的一个子类
-JstlView 可以解析jstl(标签)\实现国际化操作
-
-国际化： 针对不同地区、不同国家 ，进行不同的显示
-
-
-中国:（大陆、香港）     欢迎
-美国：			welcome
-
-
-
-
-
-i18n_zh_CH.properties   
+>资源文件：  
+i18n_zh_CH.properties     
 resource.welcome=你好  
 resource.exist=退出  
-
-i18n.properties  
-
+i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.properties)中找不到相应的key，就会默认到此文件中找)  
 
 
 
-具体实现国际化步骤：
-a.创建资源文件
-基名_语言_地区.properties
-基名_语言.properties
 
-b.配置springmvc.xml，加载资源文件
+### 具体实现国际化步骤：
+1. 创建资源文件
+基名_语言_地区.properties  
+或
+基名_语言.properties  
 
-	<!-- 加载国际化资源文件 -->
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-	<property name="basename" value="i18n"></property>
-	</bean>
-ResourceBundleMessageSource会在springmvc响应程序时 介入（解析国际化资源文件）
+2. 配置springmvc.xml，加载资源文件
+    <!-- 加载国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value="i18n"></property>
+    </bean>
+    ResourceBundleMessageSource会在springmvc响应程序时介入（解析国际化资源文件）
 
-c.通过jstl使用国际化
-jstl.jar  standar.jar
+3. 通过jstl使用国际化,导包
+>jstl.jar  standard.jar
+>注意事项：
+1. Tocmat的conf目录 需要默认配置：  
+> ![img_1.png](Tomcat默认配置.png)  
+2. idea自动装ASC码开启：  
+>File -> Settings -> Editor -> File Encodings -> 勾选 Transparent navite-to-ascii conversion
+(注：配置之后，你把文件的内容，复制出来保存，再粘贴进去。此时，你用记事本或这NodePad++打开，可以看到已经转码了。哈哈)
+![img.png](idea开启自动转ascll码.png)
 
-springmvc在启动时，会自动查找一个id="messageSource"的bean，如果有  则自动加载
+3. (响应时)spring调用ResourceBundleMessageSource进行国际化解析
+   - springmvc在启动时，会自动查找一个id="messageSource"的bean，如果有则自动加载  
+   - ![国际化](视图解析器流程.png)
 
 
 

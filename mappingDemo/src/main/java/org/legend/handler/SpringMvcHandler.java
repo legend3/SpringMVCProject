@@ -164,4 +164,8 @@ public class SpringMvcHandler {
         System.out.println(student);
         return "success";
     }
+    @RequestMapping(value="testI18n")
+    public String testI18n() {
+        return "success";
+    }
 }

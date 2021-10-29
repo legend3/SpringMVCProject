@@ -1,9 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>success</title>
 </head>
 <body>
+    <%--  中文就调i18n_zh_CN.properties
+          英文就调i18n_en_US.properties
+      --%>
+    <fmt:message key="resource.welcome"></fmt:message>
+    <fmt:message key="resource.exists"></fmt:message>
+    <br/>
     welcome to springMVC
     ==== request:<br/>
     ${requestScope.studentModelAndView.stuNo} - ${requestScope.studentModelAndView.stuName}
