@@ -363,6 +363,9 @@ i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.pr
 3. (响应时)spring调用ResourceBundleMessageSource进行国际化解析
    - springmvc在启动时，会自动查找一个id="messageSource"的bean，如果有则自动加载  
    - ![国际化](视图解析器流程.png)
+   - 遗留问题：
+     - JDK8 tomcat8.5以上；tomcat版本过高，无法成功
+     - JDK8 tomcat8.0;spring5.3.x jar包版本过高，无法成功！
 
 
 
