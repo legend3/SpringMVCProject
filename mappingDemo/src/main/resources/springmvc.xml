@@ -17,7 +17,7 @@
     </bean>
 
     <!-- 加载国际化资源文件
-        1.将ResourceBundleMessageSource在程序加载时，加入srpingmvc在启动时，会自动查找一个id
+        1.将ResourceBundleMessageSource在程序加载时，加入srpingmvc在启动时，会自动查找一个id为messageSource(固定名称)
         2.如果配置了ResourceBundleMessageSource，则该类会在程序响应时介入
      -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
