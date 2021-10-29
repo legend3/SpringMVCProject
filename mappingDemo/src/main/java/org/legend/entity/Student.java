@@ -3,6 +3,7 @@ package org.legend.entity;
 public class Student {
     private int stuNo;
     private String stuName;
+    private int stuAge;
     private Address address;
 
     public int getStuNo() {
@@ -21,6 +22,14 @@ public class Student {
         this.stuName = stuName;
     }
 
+    public int getAge() {
+        return stuAge;
+    }
+
+    public void setAge(int age) {
+        stuAge = age;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -29,13 +38,15 @@ public class Student {
         this.address = address;
     }
 
+
     @Override
     public String toString() {
         return "Student{" +
                 "stuNo=" + stuNo +
                 ", stuName='" + stuName + '\'' +
-                ", schoolAddress=" + address.getSchoolAddress() +
-                ", homeAddress=" + address.getHomeAddress() +
+                ", stuAge='" + stuAge + '\'' +
+//                ", schoolAddress=" + address.getSchoolAddress() +
+//                ", homeAddress=" + address.getHomeAddress() +
                 '}';
     }
 }

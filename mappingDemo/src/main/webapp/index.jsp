@@ -49,7 +49,7 @@
 <br/>
 <a href="/mappingDemo/handler/testCookie">获取JSESSIONID</a>
 
-<form method="post" action="/mappingDemo/handler/testStudent">
+<form method="post" action="/mappingDemo/handler/testObjectProperties">
     <%--  属性必须和form表单中的属性Name值  --%>
     学号：<input type="text" name="stuNo"/>
     学生姓名：<input type="text" name="stuName"/>
@@ -60,5 +60,19 @@
 </form>
 </br>
 <a href="/mappingDemo/handler/testServletAPI">springmvc直接使用servletapi</a>
+</br>
+</br>
+<a href="/mappingDemo/handler/testModelAndView">测试ModelAndView给响应页面带入数据</a>
+</br>
+<a href="/mappingDemo/handler/testModelMap">测试ModelMap给响应页面带入数据</a>
+</br>
+<a href="/mappingDemo/handler/testMap">测试Map给响应页面带入数据</a>
+</br>
+<a href="/mappingDemo/handler/testModel">测试Model给响应页面带入数据</a>
+<form action="/mappingDemo/handler/testModelAttribute" method="post">
+    学号：<input name="stuNo" type="hidden" value="31">
+    名字：<input name="stuName" type="text">
+    <input type="submit" value="修改">
+</form>
 </body>
 </html>
