@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>MvcViewController</title>
   </head>
   <body>
-  $END$
+    <a href="MvcViewController/handler/testMvcViewController">testMvcViewController</a>
   </body>
 </html>
