@@ -9,13 +9,18 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
+    <!-- bean扫描器(扫描有注释类的包) -->
+    <context:component-scan base-package="org.legend.handler"></context:component-scan>
+
     <!--  配置解析器  -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/views/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <mvc:view-controller path="MvcViewController/handler/testMvcViewController" view-name="success"/>
-
+<!--  无需@RequestMapping拦截  -->
+<!--    <mvc:view-controller path="MvcViewController/handler/testMvcViewController" view-name="success"/>-->
+<!--    此配置时springmvc的基础配置，很多功能都需要通过该注解来协调;不然之前的@RequestMapping会失效    -->
+    <mvc:annotation-driven></mvc:annotation-driven>
 
 </beans>

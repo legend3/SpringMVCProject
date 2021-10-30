@@ -6,8 +6,7 @@ index.jsp -> Controller(@RequsetMapping("a")) ->succes.jsp
 
 ## 省略Controller(@RequsetMapping("a"))
 >要用SpringMVC实现：index.jsp -> succes.jsp:  
-<mvc:view-controller path="a"   view-name="success" />
-
+`<mvc:view-controller path="a"   view-name="success" />`  
 以上注解 ，会让所有的请求 转入<mvc:..>中匹配映射地址，而会忽略调@RequsetMapping()；
 如果想让 @RequsetMapping("a")  和<mvc:..>共存，则需要加入一个注解：<mvc:annotation-driven></mvc:annotation-driven>
 

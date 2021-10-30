@@ -5,6 +5,7 @@
 </head>
 <body>
     welcome to springMVC
+    <br/>
     ==== request:<br/>
     ${requestScope.studentModelAndView.stuNo} - ${requestScope.studentModelAndView.stuName}
     <br/>
