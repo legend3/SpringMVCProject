@@ -51,61 +51,60 @@ index.jsp -> Controller(@RequsetMapping("a")) ->succes.jsp
 
 4. 类型转换
 
-a.Spring自带一些 常见的类型转换器：
+a.Spring自带一些常见的类型转换器：
 public String  testDelete(@PathVariable("id") String id) ，即可以接受int类型数据id  也可以接受String类型的id
 
 
-b.可以自定义类型转换器
-i.编写 自定义类型转器的类 （实现Converter接口）
-public class MyConverter  implements Converter<String,Student>{
+b.可以自定义类型转换器(将jsp提供的请求数据中获取字符串到srpingmvc中获取到一个student！)  
+i.编写 自定义类型转器的类 （实现Converter接口）  
+![类型转换](类型转换.png)
 
-	@Override
-	public Student convert(String source) {//source:2-zs-23
-		//source接受前端传来的String:2-zs-23
-		String[] studentStrArr = source.split("-") ;
-		Student student = new Student();
-		student.setId(  Integer.parseInt(  studentStrArr[0]) );
-		student.setName(studentStrArr[1]);
-		student.setAge(Integer.parseInt(studentStrArr[2] ));
-		return student;
-	}
+    public class MyConverter  implements Converter<String,Student>{
+        @Override
+        public Student convert(String source) {//source:2-zs-23
+            //source接受前端传来的String:2-zs-23
+            String[] studentStrArr = source.split("-") ;
+            Student student = new Student();
+            student.setId(  Integer.parseInt(  studentStrArr[0]) );
+            student.setName(studentStrArr[1]);
+            student.setAge(Integer.parseInt(studentStrArr[2] ));
+            return student;
+        }
+    
+    }
 
-}
-
-
-ii.配置：将MyConverter加入到springmvc中
-<!-- 1将 自定义转换器 纳入SpringIOC容器 -->
-	<bean  id="myConverter" class="org.lanqiao.converter.MyConverter"></bean>
+>ii.配置：将MyConverter加入到springmvc中  
+1. 将 自定义转换器 纳入SpringIOC容器  
+`<bean  id="myConverter" class="org.lanqiao.converter.MyConverter"></bean>`
 	
-	<!-- 2将myConverter再纳入 SpringMVC提供的转换器Bean -->
-	<bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">
-		<property name="converters">
-			<set>
-				<ref bean="myConverter"/>
-			</set>
-		</property>
-	</bean>
-	
-	<!-- 3将conversionService注册到annotation-driven中 -->
-	<!--此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
-	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+2. 将myConverter再纳入SpringMVC提供的转换器Bean(所有转换器都在此bean中进行注册！)   
+`
+    <bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"/>
+            </set>
+        </property>
+    </bean>
+    `
+3. 将conversionService注册到annotation-driven中  
+   - 此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  
+   `<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>`
 
-测试转换器：
-@RequestMapping(value="testConverter")
-public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23
+4. 测试转换器:
+`@RequestMapping(value="testConverter")  
+public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23  
+            System.out.println(student.getId()+","+student.getName()+","+student.getAge());  
+            return "success";  
+        }  
+`
 
-			System.out.println(student.getId()+","+student.getName()+","+student.getAge());
-			
-			return "success";
-		}
-
-
-
-其中@RequestParam("studentInfo")是触发转换器的桥梁：
-@RequestParam("studentInfo")接受的数据 是前端传递过来的：2-zs-23  ，但是 需要将该数据 复制给 修饰的目的对象Student；因此SPringMVC可以发现 接收的数据 和目标数据不一致，并且 这两种数据分别是 String、Student,正好符合public Student convert(String source)转换器。
+其中@RequestParam("studentInfo")是触发**转换器的桥梁**:  
+@RequestParam("studentInfo")接受的数据 是前端传递过来的：2-zs-23，但是 需要将该数据复制给修饰的目的对象Student；
+因此SpringMVC可以发现 接收的数据 和目标数据不一致，并且 这两种数据分别是 String、Student,正好符合public Student convert(String source)转换器,因此触发转换器！
 
 
-5.数据格式化
+5. 数据格式化
 SimpleDateForamt sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
 SPringMVC提供了很多注解，方便我们数据格式化
 实现步骤：

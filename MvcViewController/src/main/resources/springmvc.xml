@@ -25,4 +25,19 @@
     <!-- 该注解 会让 springmvc： 接收一个请求，并且该请求 没有对应的@requestmapping时，将该请求 交给服务器默认的servlet去处理（直接访问）  -->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
+
+    <!-- 1.将 自定义转换器 纳入SpringIOC容器 -->
+    <bean  id="myConverter" class="org.legend.converter.MyConverter"></bean>
+    <!-- 2.将myConverter再纳入 SpringMVC提供的转换器Bean  -->
+    <bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"/>
+            </set>
+        </property>
+    </bean>
+    <!-- 3.将conversionService注册到annotation-driven中 -->
+    <!--此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+
 </beans>

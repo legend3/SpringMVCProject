@@ -4,7 +4,6 @@ public class Student {
     private int stuNo;
     private String stuName;
     private int stuAge;
-    private Address address;
 
     public int getStuNo() {
         return stuNo;
@@ -30,13 +29,6 @@ public class Student {
         stuAge = age;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
 
     @Override
@@ -45,8 +37,6 @@ public class Student {
                 "stuNo=" + stuNo +
                 ", stuName='" + stuName + '\'' +
                 ", stuAge='" + stuAge + '\'' +
-//                ", schoolAddress=" + address.getSchoolAddress() +
-//                ", homeAddress=" + address.getHomeAddress() +
                 '}';
     }
 }

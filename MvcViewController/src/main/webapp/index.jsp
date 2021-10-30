@@ -82,6 +82,13 @@
     <input type="submit" value="修改">
   </form>
   </br>
+<%-- 测试静态资源 --%>
   <a href="MvcViewController/handler/testMvcViewController">testMvcViewController</a>
+  </br>
+<%-- 测试类型转换器 --%>
+  <form action="/MvcViewController/handler/testConverter" method="post">
+    学号信息:<input name="studentInfo" type="text"/>
+    <input type="submit" value="查询"/>
+  </form>
   </body>
 </html>

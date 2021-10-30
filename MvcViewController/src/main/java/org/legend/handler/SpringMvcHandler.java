@@ -164,4 +164,10 @@ public class SpringMvcHandler {
         System.out.println(student);
         return "success";
     }
+    //测试转换器
+    @RequestMapping(value="testConverter")
+    public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23
+        System.out.println(student.getStuNo() + "," + student.getStuName() + "," + student.getAge());
+        return "success";
+    }
 }
