@@ -18,14 +18,7 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!-- 加载国际化资源文件
-        0.通过InternalResourceViewResolver视图解析，会发现有i18n资源文件，就自动转为相应view视图(jstl视图)，交给ResourceBundleMessageSource
-        1.将ResourceBundleMessageSource在程序加载时，加入srpingmvc在启动时，会自动查找一个id为messageSource(固定名称)
-        2.如果配置了ResourceBundleMessageSource，则该类会在程序响应时介入
-     -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <!--   指定基名、(资源文件的)编码格式     -->
-        <property name="basename" value="i18n"></property>
-        <property name="defaultEncoding" value="UTF-8"></property>
-    </bean>
+    <mvc:view-controller path="handler/testMvcViewController" view-name="success"/>
+
+
 </beans>

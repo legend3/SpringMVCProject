@@ -1,4 +1,4 @@
-# springmvc:
+# springmvc:(P1)
 1. jar
 - spring-aop.jar
 - spring-bean.jar
@@ -88,7 +88,7 @@ url
 
 
 
-## RequestMapping注解映射
+## RequestMapping注解映射(P2、P3、P4、P5、P6、P7)
 - 是去匹配@RequestMapping注解，可以和方法名、类名不一致  
 - 通过method指定请求方式(get  post  delete put):  
   - @RequestMapping(value="welcome",method=RequestMethod.POST)//映射  
@@ -314,6 +314,9 @@ public String update()
 
 - 视图的顶级接口:View
 - 视图解析器：ViewResolver
+![View实现类简介](View实现类简介.png)
+
+
 
 常见的视图和解析器：
 - InternalResourceView(视图)、InternalResourceViewResolver(解析器)
@@ -324,20 +327,21 @@ public String update()
 - JstlView：InternalResourceView的一个子类
   - JstlView 可以解析jstl(标签)\实现国际化操作
 
->国际化： 针对不同地区、不同国家 ，进行不同的显示 
-中国:（大陆、香港）     欢迎  
-美国：			welcome  
+
+### 国际化： 针对不同地区、不同国家 ，进行不同的显示 
+- 中国(大陆、香港):    欢迎  
+- 美国:			    welcome  
 
 >资源文件：  
 i18n_zh_CH.properties     
 resource.welcome=你好  
 resource.exist=退出  
-i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.properties)中找不到相应的key，就会默认到此文件中找)  
+i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.properties)中找不到相应的key，就会默认到此文件中找)
+
+![常见的资源文件命名](常见的资源文件命名.png)
 
 
-
-
-### 具体实现国际化步骤：
+#### 具体实现国际化步骤：
 1. 创建资源文件
 基名_语言_地区.properties  
 或
@@ -363,9 +367,39 @@ i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.pr
 3. (响应时)spring调用ResourceBundleMessageSource进行国际化解析
    - springmvc在启动时，会自动查找一个id="messageSource"的bean，如果有则自动加载  
    - ![国际化](视图解析器流程.png)
-   - 遗留问题：
-     - JDK8 tomcat8.5以上；tomcat版本过高，无法成功
-     - JDK8 tomcat8.0;spring5.3.x jar包版本过高，无法成功！
+   - jstl包用2011的
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

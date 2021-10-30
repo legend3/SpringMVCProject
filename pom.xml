@@ -7,6 +7,9 @@
     <groupId>org.legend.springmvcproject</groupId>
     <artifactId>SpringMVCProject</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>MvcViewController</module>
+    </modules>
     <packaging>pom</packaging>
 
     <properties>
