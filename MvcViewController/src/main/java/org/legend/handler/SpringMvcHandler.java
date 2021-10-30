@@ -124,7 +124,8 @@ public class SpringMvcHandler {
         student.setStuName("lilei");
 
         mm.put("studentModelMap", student);//相当于request.setAttribute("student", student);给success.jsp带入数据
-        return "success";
+//        forward:            redirect:
+        return "redirect:/views/success.jsp";
     }
     @RequestMapping(value="testMap")
     public String testMap(Map<String, Object> m) {
