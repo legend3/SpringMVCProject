@@ -6,8 +6,8 @@ import org.springframework.format.annotation.NumberFormat;
 import java.util.Date;
 
 public class Student {
-    private int stuNo;
     @NumberFormat(pattern = "###,#")//#:数字，,:占位符
+    private Integer stuNo;
     private String stuName;
     private int stuAge;
     @DateTimeFormat(pattern="yyyy/MM/dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
