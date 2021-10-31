@@ -1,9 +1,18 @@
 package org.legend.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
+import java.util.Date;
+
 public class Student {
     private int stuNo;
+    @NumberFormat(pattern = "###,#")//#:数字，,:占位符
     private String stuName;
     private int stuAge;
+    @DateTimeFormat(pattern="yyyy/MM/dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
+    private Date stuBirthDate;
+
 
     public int getStuNo() {
         return stuNo;
@@ -29,7 +38,21 @@ public class Student {
         stuAge = age;
     }
 
+    public int getStuAge() {
+        return stuAge;
+    }
 
+    public void setStuAge(int stuAge) {
+        this.stuAge = stuAge;
+    }
+
+    public Date getStuBirthDate() {
+        return stuBirthDate;
+    }
+
+    public void setStuBirthDate(Date stuBirthDate) {
+        this.stuBirthDate = stuBirthDate;
+    }
 
     @Override
     public String toString() {
@@ -37,6 +60,7 @@ public class Student {
                 "stuNo=" + stuNo +
                 ", stuName='" + stuName + '\'' +
                 ", stuAge='" + stuAge + '\'' +
+                ", stuBirthDate='" + stuBirthDate + '\'' +
                 '}';
     }
 }

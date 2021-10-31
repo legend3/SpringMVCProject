@@ -90,5 +90,12 @@
     学号信息:<input name="studentInfo" type="text"/>
     <input type="submit" value="查询"/>
   </form>
+  <form action="/MvcViewController/handler/testDateTimeFormat" method="post">
+    学号:<input name="stuNo" type="text"/>
+    姓名:<input name="stuName" type="text"/>
+    年龄:<input name="stuAge" type="text"/>
+    出生日期:<input name="stuBirthDate" type="text"/>
+    <input type="submit" value="查询"/>
+  </form>
   </body>
 </html>

@@ -1,10 +1,11 @@
 package org.legend.handler;
 
-
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -167,7 +168,18 @@ public class SpringMvcHandler {
     //测试转换器
     @RequestMapping(value="testConverter")
     public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23
-        System.out.println(student.getStuNo() + "," + student.getStuName() + "," + student.getAge());
+        System.out.println(student);
+        return "success";
+    }
+    //测试数据化
+    @RequestMapping(value="testDateTimeFormat")
+    public String testDateTimeFormat(Student student, BindingResult result) {// 前端：2-zs-23
+        System.out.println(student);
+        if(result.getErrorCount() > 0) {
+            for(FieldError error: result.getFieldErrors()){
+                System.out.println(error);
+            }
+        }
         return "success";
     }
 }

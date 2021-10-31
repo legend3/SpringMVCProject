@@ -106,14 +106,15 @@ public String testConverter(@RequestParam("studentInfo")  Student student) {// �
 
 5. 数据格式化
 SimpleDateForamt sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
-SPringMVC提供了很多注解，方便我们数据格式化
+SpringMVC提供了很多注解，方便我们数据格式化
 实现步骤：
 a.配置
 <!-- 配置 数据格式化 注解 所依赖的bean -->
-<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-</bean>
-
+`<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">  
+</bean>`
 
 b.通过注解使用
-@DateTimeFormat(pattern="yyyy-MM-dd")
-@NumberFormat(parttern="###,#")  
+`@DateTimeFormat(pattern="yyyy-MM-dd")  
+@NumberFormat(parttern="###,#")`只适合
+
+注解：FormattingConversionServiceFactoryBean即包含格式化又包含类型转换ConversionServiceFactoryBean
