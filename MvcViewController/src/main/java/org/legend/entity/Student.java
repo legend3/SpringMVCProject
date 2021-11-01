@@ -12,8 +12,8 @@ public class Student {
     private Integer stuNo;
     private String stuName;
     private int stuAge;
-//    @DateTimeFormat(pattern="yyyy/MM/dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
-    @Past
+    @Past(message = "超过了当前日期时间")
+    @DateTimeFormat(pattern="yyyy-MM-dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
     private Date stuBirthDate;
 
 
