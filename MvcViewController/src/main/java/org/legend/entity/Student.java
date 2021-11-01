@@ -1,5 +1,6 @@
 package org.legend.entity;
 
+import jakarta.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -10,7 +11,8 @@ public class Student {
     private Integer stuNo;
     private String stuName;
     private int stuAge;
-    @DateTimeFormat(pattern="yyyy/MM/dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
+//    @DateTimeFormat(pattern="yyyy/MM/dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
+    @Past
     private Date stuBirthDate;
 
 

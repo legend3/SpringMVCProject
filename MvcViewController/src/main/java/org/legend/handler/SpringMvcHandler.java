@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.Map;
 
 //接口/类型 注解 配置
@@ -172,18 +173,18 @@ public class SpringMvcHandler {
         return "success";
     }
     //测试数据化
-    @RequestMapping(value="testDateTimeFormat")
+    @RequestMapping(value="testDateTimeFormat")//如果Student格式化出错，会将错误信息传入result中
     /**
      * 拦截亲求获取Student信息
      * BindingResult:发生异常时的错误信息
      * Map:获取请求值传递给HttpServletRequest
      */
-    public String testDateTimeFormat(Student student, BindingResult result, Map<String, Object> map) {// 前端：2-zs-23
+    public String testDateTimeFormat(@Valid Student student, Map<String, Object> map, BindingResult result) {// 前端：2-zs-23
         System.out.println(student);
         if(result.getErrorCount() > 0) {
             for(FieldError error: result.getFieldErrors()){
                 System.out.println(error);
-                map.put("errors", result.getFieldErrors());
+                map.put("errors", result.getFieldErrors());//将错误信息传入request域中的errors中
             }
         }
         return "success";

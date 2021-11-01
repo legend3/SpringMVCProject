@@ -122,43 +122,43 @@ b.通过注解使用
 ## 错误信息处理
 1. 错误消息：
 `public String testDateTimeFormat(Student student, BindingResult result ,Map<String,Object> map) {`
-需要验证的数据是 Student中的birthday, SpringMVC要求 如果校验失败则将错误信息自动放入 该对象之后紧挨着的BindingResult中。
-即Student student, BindingResult result之间 不能有其他参数。
+- 需要验证的数据是 Student中的birthday, SpringMVC要求 如果校验失败则将错误信息自动放入 该对象之后紧挨着的BindingResult中。即Student student, BindingResult result之间 不能有其他参数。
+- (前端显示错误信息)如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。
 
-> 如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。
-注:后续通过maven导入jstsl包，可能没有导出Tomcat的lib中可以在Artifact中检查WEB-INF/lib;如果没有则在Artifact中重新部署项目包！
+> 注:后续通过maven导入jstsl包，可能没有导出Tomcat的lib中可以在Artifact中检查WEB-INF/lib;如果没有则在Artifact中重新部署项目包！
 ![jstl包导入](jstl包导入.png)
 
 
 2. 数据校验   
-   JSR303  
-   Hibernate Validator
+- JSR303
+![JSR303注解表](JSR303注解表.png)
+- Hibernate Validator:包含JSR303,是对JSR303的扩展
+![HibernateValidator注解表](HibernateValidator.png)
 
 使用Hibernate Validator步骤：
 
-a.jar（注意各个jar之间可能存在版本不兼容）
-hibernate-validator-5.0.0.CR2.jar 	classmate-0.8.0.jar 	jboss-logging-3.1.1.GA.jar
-validation-api-1.1.0.CR1.jar 	hibernate-validator-annotation-processor-5.0.0.CR2.jar
+a.所需jar包（注意各个jar之间可能存在版本不兼容）  
+hibernate-validator-5.0.0.CR2.jar  
+classmate-0.8.0.jar  
+jboss-logging-3.1.1.GA.jar  
+validation-api-1.1.0.CR1.jar  
+hibernate-validator-annotation-processor-5.0.0.CR2.jar
 
-b配置
-<mvc:annotation-driven ></mvc:annotation-driven>
-此时mvc:annotation-driven的作用：要实现Hibernate Validator/JSR303 校验（或者其他各种校验），必须实现SpringMVC提供的一个接口：ValidatorFactory
+b.配置  
+`<mvc:annotation-driven ></mvc:annotation-driven>`  
+>此时mvc:annotation-driven的作用：
+- 要实现Hibernate Validator/JSR303 校验（或者其他各种校验），必须实现SpringMVC提供的一个接口：ValidatorFactory  
+- LocalValidatorFactoryBean是ValidatorFactory的一个实现类。  
+- <mvc:annotation-driven ></mvc:annotation-driven>会在springmvc容器中 自动加载一个LocalValidatorFactoryBean类，因此可以直接实现数据校验。
 
-LocalValidatorFactoryBean是ValidatorFactory的一个实现类。
-<mvc:annotation-driven ></mvc:annotation-driven>会在springmvc容器中 自动加载一个LocalValidatorFactoryBean类，因此可以直接实现数据校验。
-
-c.直接使用注解
-
-public class Student {
-
+c.直接使用注解  
+`public class Student {
 	@Past//当前时间以前
 	private Date birthday ;
-}
-
-
-在校验的Controller中 ，给校验的对象前增加 @Valid
-public String testDateTimeFormat(@Valid Student student, BindingResult result ,Map<String,Object> map) {
-{...}
+}`
+>在校验的Controller中 ，给校验的对象前增加 @Valid  
+`public String testDateTimeFormat(@Valid Student student, BindingResult result ,Map<String,Object> map) {
+{...}`
 
 
 3. Ajax请求SpringMVC，并且JSON格式的数据

@@ -40,7 +40,6 @@
     <!--此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
-
     <!--    -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
@@ -49,4 +48,5 @@
             </set>
         </property>
     </bean>
+
 </beans>
