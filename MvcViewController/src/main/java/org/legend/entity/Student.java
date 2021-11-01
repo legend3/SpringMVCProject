@@ -1,9 +1,10 @@
 package org.legend.entity;
 
-import jakarta.validation.constraints.Past;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 public class Student {

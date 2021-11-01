@@ -38,7 +38,7 @@ index.jsp -> Controller(@RequsetMapping("a")) ->succes.jsp
         <servlet-name>abc</servlet-name>
         <url-pattern>/abc</url-pattern>
     </servlet-mapping>
-![静态资源处理Tomcat配置](静态资源处理Tomcat配置.png)
+![静态资源处理Tomcat配置](MvcViewController/静态资源处理Tomcat配置.png)
 
 >解决静态资源方案：如果有springmvc对应的@requestMapping则交给spring处理；如果没有对应@requestMapping,则交给服务器tomcat默认的servlet去处理  ：实现方法，只需要增加2个注解即可 springmvc.xml:  
 <mvc:default-servlet-handler></mvc:default-servlet-handler>
@@ -57,7 +57,7 @@ public String  testDelete(@PathVariable("id") String id) ，即可以接受int�
 
 b.可以自定义类型转换器(将jsp提供的请求数据中获取字符串到srpingmvc中获取到一个student！)  
 i.编写 自定义类型转器的类 （实现Converter接口）  
-![类型转换](类型转换.png)
+![类型转换](MvcViewController/类型转换.png)
 
     public class MyConverter  implements Converter<String,Student>{
         @Override
@@ -126,23 +126,23 @@ b.通过注解使用
 - (前端显示错误信息)如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。
 
 > 注:后续通过maven导入jstsl包，可能没有导出Tomcat的lib中可以在Artifact中检查WEB-INF/lib;如果没有则在Artifact中重新部署项目包！
-![jstl包导入](jstl包导入.png)
+![jstl包导入](MvcViewController/jstl包导入.png)
 
 
-2. 数据校验   
+2. 数据校验
 - JSR303
-![JSR303注解表](JSR303注解表.png)
+![JSR303注解表](MvcViewController/JSR303注解表.png)
 - Hibernate Validator:包含JSR303,是对JSR303的扩展
-![HibernateValidator注解表](HibernateValidator.png)
+![HibernateValidator注解表](MvcViewController/HibernateValidator.png)
 
 使用Hibernate Validator步骤：
 
 a.所需jar包（注意各个jar之间可能存在版本不兼容）  
-hibernate-validator-5.0.0.CR2.jar  
-classmate-0.8.0.jar  
-jboss-logging-3.1.1.GA.jar  
-validation-api-1.1.0.CR1.jar  
-hibernate-validator-annotation-processor-5.0.0.CR2.jar
+hibernate-validator-6.2.0.Final.jar  
+classmate-1.5.1.jar  
+jboss-logging-3.4.1.Final.jar  
+jakarta.validation-api-2.0.2.jar  
+hibernate-validator-annotation-processor-6.2.0.Final.jar  
 
 b.配置  
 `<mvc:annotation-driven ></mvc:annotation-driven>`  
@@ -151,12 +151,13 @@ b.配置
 - LocalValidatorFactoryBean是ValidatorFactory的一个实现类。  
 - <mvc:annotation-driven ></mvc:annotation-driven>会在springmvc容器中 自动加载一个LocalValidatorFactoryBean类，因此可以直接实现数据校验。
 
-c.直接使用注解  
+c.
+- 直接使用注解  
 `public class Student {
-	@Past//当前时间以前
-	private Date birthday ;
+    @Past//当前时间以前
+    private Date birthday ;
 }`
->在校验的Controller中 ，给校验的对象前增加 @Valid  
+- 在校验的Controller中 ，给校验的对象前增加 @Valid，就会在对象里的Hibernate Validator注释进行校验
 `public String testDateTimeFormat(@Valid Student student, BindingResult result ,Map<String,Object> map) {
 {...}`
 
