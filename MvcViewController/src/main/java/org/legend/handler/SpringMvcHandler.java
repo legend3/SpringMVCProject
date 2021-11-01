@@ -173,11 +173,17 @@ public class SpringMvcHandler {
     }
     //测试数据化
     @RequestMapping(value="testDateTimeFormat")
-    public String testDateTimeFormat(Student student, BindingResult result) {// 前端：2-zs-23
+    /**
+     * 拦截亲求获取Student信息
+     * BindingResult:发生异常时的错误信息
+     * Map:获取请求值传递给HttpServletRequest
+     */
+    public String testDateTimeFormat(Student student, BindingResult result, Map<String, Object> map) {// 前端：2-zs-23
         System.out.println(student);
         if(result.getErrorCount() > 0) {
             for(FieldError error: result.getFieldErrors()){
                 System.out.println(error);
+                map.put("errors", result.getFieldErrors());
             }
         }
         return "success";

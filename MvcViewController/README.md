@@ -122,10 +122,13 @@ b.通过注解使用
 ## 错误信息处理
 1. 错误消息：
 `public String testDateTimeFormat(Student student, BindingResult result ,Map<String,Object> map) {`
-需要验证的数据是 Student中的birthday, SpringMVC要求 如果校验失败  则将错误信息 自动放入 该对象之后紧挨着的	BindingResult中。
+需要验证的数据是 Student中的birthday, SpringMVC要求 如果校验失败则将错误信息自动放入 该对象之后紧挨着的BindingResult中。
 即Student student, BindingResult result之间 不能有其他参数。
 
 > 如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。
+注:后续通过maven导入jstsl包，可能没有导出Tomcat的lib中可以在Artifact中检查WEB-INF/lib;如果没有则在Artifact中重新部署项目包！
+![jstl包导入](jstl包导入.png)
+
 
 2. 数据校验   
    JSR303  
@@ -158,7 +161,7 @@ public String testDateTimeFormat(@Valid Student student, BindingResult result ,M
 {...}
 
 
-3.Ajax请求SpringMVC，并且JSON格式的数据
+3. Ajax请求SpringMVC，并且JSON格式的数据
 a.jar
 jackson-annotations-2.8.9.jar
 jackson-core-2.8.9.jar

@@ -1,9 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>success</title>
 </head>
 <body>
+    <c:forEach items="${requestScope.errors}" var="error">
+        ${error.getDefaultMessage()}<br/>
+    </c:forEach>
+
+    <br/>
     welcome to springMVC
     <br/>
     ==== request:<br/>
