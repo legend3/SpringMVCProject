@@ -9,11 +9,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -110,8 +115,9 @@ public class SpringMvcHandler {
     public String  testServletAPI(HttpServletRequest request, HttpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
 //        String name = request.getParameter("uname");
         System.out.println(request);
-        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+        return "success";//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
+    //给响应页面带入值
     @RequestMapping(value="testModelAndView")
     public ModelAndView testModelAndView() {
         ModelAndView mv = new ModelAndView("success");
@@ -120,6 +126,7 @@ public class SpringMvcHandler {
         student.setStuNo(2);
         student.setStuName("lilei");
 
+        //只存储到request域中
         mv.addObject("studentModelAndView", student);//相当于request.setAttribute("student", student);给success.jsp带入数据
         return mv;
     }
@@ -215,5 +222,25 @@ public class SpringMvcHandler {
         persons.add(person4);
 
         return persons;//返回给Ajax，以Json数组的形式返回给Ajax的result.
+    }
+    //测试上传文件
+    @RequestMapping(value = "testUploadFile", method = RequestMethod.POST)
+    public String testUploadFile(@RequestParam("describe") String describe, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("文件描述：" + describe);
+        //文件上传到硬盘
+        //流可以传输一切
+        InputStream input = file.getInputStream();//IO
+        String filename = file.getOriginalFilename();//获取上传文件的名字
+        OutputStream output = new FileOutputStream("d:\\" + filename);//输出到哪个硬盘位置
+
+        byte[] bs = new byte[1024];//每次读1M(缓冲)
+        int len = -1;
+        while ((len = input.read(bs)) != -1) {
+            output.write(bs, 0, len);//bs读取到的数据，从0下标开始写
+        }
+        input.close();
+        output.close();
+        System.out.println("上传完毕！");
+        return "success";
     }
 }

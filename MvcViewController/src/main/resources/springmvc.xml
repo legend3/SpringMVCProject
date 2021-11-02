@@ -39,7 +39,6 @@
     <!--此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
-
     <!--    -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
@@ -47,5 +46,12 @@
                 <ref bean="myConverter"/>
             </set>
         </property>
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 上传单个文件的最大值，单位Byte;如果-1，表示无限制 -->
+        <property name="maxUploadSize" value="204800"/>
+        <!--   文件上传时最大允许内存      -->
+<!--        <property name="maxInMemorySize" value="2048"/>-->
     </bean>
 </beans>

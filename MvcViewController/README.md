@@ -173,35 +173,198 @@ b.
 >@ResponseBody修饰的方法，会将该方法的返回值 以一个json数组的形式返回给前台
 ![Ajax接收图鉴](Ajax接收图鉴.png)
 
-@ResponseBody//告诉SpringMVC，此时的返回 不是一个 View页面，而是一个 ajax调用的返回值（Json数组）
-@RequestMapping(value="testJson")
-public List<Student> testJson() {
-//Controller-Service-dao
-//StudentService studentService = new StudentServiceImp();
-//			List<Student> students =  studentService.qeuryAllStudent();
-//模拟调用service的查询操作
+`@ResponseBody//告诉SpringMVC，此时的返回 不是一个 View页面，而是一个 ajax调用的返回值（Json数组）  
+@RequestMapping(value="testJson")  
+public List<Student> testJson() {  
+//Controller-Service-dao  
+//StudentService studentService = new StudentServiceImp();  
+//			List<Student> students =  studentService.qeuryAllStudent();  
+//模拟调用service的查询操作`  
 
-			...
-			List<Student> students = new ArrayList<>();
-			students.add(stu1) ;
-			students.add(stu2) ;
-			students.add(stu3) ;
+			`...  
+			List<Student> students = new ArrayList<>();  
+			students.add(stu1) ;  
+			students.add(stu2) ;  
+			students.add(stu3) ;  
 			
 			return students;
 		}
+`
+> 前台：服务端将返回值结果 以json数组的形式 传给了result。
+`
+$("#testJson").click(function(){  
+//通过ajax请求springmvc  
+$.post(  
+"handler/testJson",//服务器地址  
+//{"name":"zs","age":23}  
+function(result){//服务端处理完毕后的回调函数 List<Student> students， 加上@ResponseBody后， students实质是一个json数组的格式  
+for(var i=0;i<result.length ;i++){  
+alert(result[i].id +"-"+result[i].name +"-"+result[i].age);  
+}  
+}  
+);`
+
+## SpringMVC实现文件上传：
+> ——前提  
+上传过程: 页面-->内存-->本地磁盘
+> 和Servlet方式的本质一样，都是通过commons-fileupload.jar和commons-io.jar
+SpringMVC可以简化文件上传的代码，但是必须满足条件：实现MultipartResolver接口 ；而该接口的实现类SpringMVC也已经提供了CommonsMultipartResolver
+
+### 具体步骤：（直接使用CommonsMultipartResolver实现上传）
+1. 导入相关jar包
+- commons-fileupload.jar
+- commons-io.jar 
+2. 配置CommonsMultipartResolver
+  - 将其加入SpringIOC容器
 
 
-前台：服务端将返回值结果 以json数组的形式 传给了result。
-$("#testJson").click(function(){
-//通过ajax请求springmvc
-$.post(
-"handler/testJson",//服务器地址
-//{"name":"zs","age":23}
-function(result){//服务端处理完毕后的回调函数 List<Student> students， 加上@ResponseBody后， students实质是一个json数组的格式
-for(var i=0;i<result.length ;i++){
-alert(result[i].id +"-"+result[i].name +"-"+result[i].age);
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding" value="UTF-8"></property>
+			<!-- 上传单个文件的最大值，单位Byte;如果-1，表示无限制 -->
+			<property name="maxUploadSize"  value="102400"></property>
+	</bean>
+
+3. 处理方法
+//文件上传处理方法
+`@RequestMapping(value="testUpload") //abc.png
+public String testUpload(@RequestParam("desc") String desc  , @RequestParam("file") MultipartFile file  ) throws IOException {
+`
+            `
+            System.out.println("文件描述信息："+desc);
+            //jsp中上传的文件：file
+            `
+            `
+            InputStream input = file.getInputStream() ;//IO
+            String fileName = file.getOriginalFilename() ;
+            `
+            `
+            OutputStream out = new FileOutputStream("d:\\"+fileName) ;
+            `
+            `
+            byte[] bs = new byte[1024];
+            int len = -1;
+            while(( len = input.read(bs)) !=-1 ) {
+                out.write(bs, 0, len);
+            }
+            out.close();
+            input.close();
+            //将file上传到服务器中的 某一个硬盘文件中
+        System.out.println("上传成功！");
+            `
+            `
+            return "success";
+        }
+        `
+    
+    `<form action="handler/testUpload" method="post"  enctype="multipart/form-data">`  
+        `<input type="file" name="file" />`  
+        `描述:<input name="desc" type="text" />`
+        `<input type="submit" value="上传">`  
+    `</form>`
+
+> 框架:   将原来自己写的1000行代码，变成：框架帮你写900行，剩下100行自己写
+    控制器：handler  servlet   controller   action
+
+## 拦截器
+    拦截器的原理和过滤器相同。
+> SpringMVC：要想实现拦截器，必须实现一个接口HandlerInterceptor
+
+
+- ctrl+shift+r ：自己编写的代码.java  .jsp .html
+- ctrl+shift+t ：jar中的代码
+
+a.编写拦截器implements HandlerInterceptor
+b.配置：将自己写的拦截器 配置到springmvc中（spring）
+
+
+> 拦截器1拦截请求- 拦截器2拦截请求 - 请求方法 - 拦截器2处理相应-拦截器1处理相应-    只会被 最后一个拦截器的afterCompletion()拦截
+
+> 如果有多个拦截器，则每个拦截器的preHandle postHandle 都会在相应时机各被触发一次；但是afterCompletion， 只会执行最后一个拦截器的该方法。
+
+
+3.异常处理
+SpringMVC：  HandlerExceptionResolver接口，
+
+
+该接口的每个实现类 都是异常的一种处理方式：
+
+a.
+ExceptionHandlerExceptionResolver： 主要提供了@ExceptionHandler注解，并通过该注解处理异常
+
+	//该方法 可以捕获本类中  抛出的ArithmeticException异常
+	@ExceptionHandler({ArithmeticException.class,ArrayIndexOutOfBoundsException.class  })
+	public String handlerArithmeticException(Exception e) {
+		System.out.println(e +"============");
+		return "error" ;
+	}
+
+@ExceptionHandler标识的方法的参数 必须在异常类型(Throwable或其子类) ，不能包含其他类型的参数
+
+
+
+异常处理路径：最短优先  
+如果有方法抛出一个ArithmeticException异常，而该类中 有2个对应的异常处理法你发：
+
+@ExceptionHandler({Exception.class  })
+public ModelAndView handlerArithmeticException2(Exception e) {}
+
+	@ExceptionHandler({ArithmeticException.class  })
+	public ModelAndView handlerArithmeticException1(Exception e) {}
+则优先级：  最短优先。
+
+
+
+
+@ExceptionHandler默认只能捕获 当前类中的异常方法。
+如果发生异常的方法  和处理异常的方法 不在同一个类中：@ControllerAdvice
+
+
+总结：如果一个方法用于处理异常，并且只处理当前类中的异常：@ExceptionHandler
+如果一个方法用于处理异常，并且处理所有类中的异常： 类前加@ControllerAdvice、 处理异常的方法前加@ExceptionHandler
+
+
+
+b.
+ResponseStatusExceptionResolver：自定义异常显示页面 @ResponseStatus
+
+
+@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="数组越界222!!!")
+public class MyArrayIndexOutofBoundsException extends Exception {//自定义异常
+
 }
+
+
+@ResponseStatus也可以标志在方法前：
+@RequestMapping("testMyException")
+public String testMyException(@RequestParam("i") Integer i) throws MyArrayIndexOutofBoundsException {
+if(i == 3) {
+throw new MyArrayIndexOutofBoundsException();//抛出异常
 }
-);
+return "success" ;
+}
+
+	@RequestMapping("testMyException2")
+	public String testMyException2(@RequestParam("i") Integer i) {
+		if(i == 3) {
+			return "redirect:testResponseStatus" ;//跳转到某一个 异常处理方法里
+		}
+		return "success" ;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

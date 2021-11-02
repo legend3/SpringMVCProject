@@ -110,5 +110,12 @@
   </form>
   <br/>
   <input type="button" value="testJson" id="testJson">
+  <br/>
+  <br/>
+  <form action="/MvcViewController/handler/testUploadFile" method="post" enctype="multipart/form-data">
+    <input name="file" type="file"/>
+    描述:<input name="describe" type="text"/>
+    <input type="submit" value="上传"/>
+  </form>
   </body>
 </html>
