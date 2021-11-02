@@ -163,14 +163,15 @@ c.
 
 
 3. Ajax请求SpringMVC，并且JSON格式的数据
-a.jar
-jackson-annotations-2.8.9.jar
-jackson-core-2.8.9.jar
-jackson-databind-2.8.9.jar
+a.导入相关jar
+- jackson-annotations-2.13.0.jar
+- jackson-core-2.13.0.jar
+- jackson-databind-2.13.0.jar
 
 
-b。
-@ResponseBod修饰的方法，会将该方法的返回值 以一个json数组的形式返回给前台
+b.
+>@ResponseBody修饰的方法，会将该方法的返回值 以一个json数组的形式返回给前台
+![Ajax接收图鉴](Ajax接收图鉴.png)
 
 @ResponseBody//告诉SpringMVC，此时的返回 不是一个 View页面，而是一个 ajax调用的返回值（Json数组）
 @RequestMapping(value="testJson")

@@ -4,6 +4,7 @@ package org.legend.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
@@ -15,7 +16,20 @@ public class Student {
     @Past(message = "超过了当前日期时间")
     @DateTimeFormat(pattern="yyyy-MM-dd")//格式化:前端传递来的数据，将前端传过来的数据固定为：yyyy/MM/dd
     private Date stuBirthDate;
+    @Email(message = "不是一个合法的邮箱地址")//自定义提示语
+    private String Email;
 
+    public void setStuNo(Integer stuNo) {
+        this.stuNo = stuNo;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
 
     public int getStuNo() {
         return stuNo;

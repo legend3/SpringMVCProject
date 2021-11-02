@@ -1,6 +1,7 @@
 package org.legend.handler;
 
 
+import org.legend.entity.Person;
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 //接口/类型 注解 配置
@@ -189,5 +192,28 @@ public class SpringMvcHandler {
             }
         }
         return "success";
+    }
+    //测试Ajax
+    @ResponseBody//告诉srpigmvc此时的返回不是一个view页面，而是一个Ajax调用的返回值(Json数组)！(谁调就返回给谁，响应给Ajax)
+    @RequestMapping(value="testJson", method = RequestMethod.POST, produces="application/json")
+    //produces: 指定返回的内容类型 ，仅当request请求头中的(Accept)类型中包含该指定类型才返回(本例子要求响应返回json)
+    //补充: consumes: 指定处理请求的 提交内容类型 （Content-Type），例如 application/json, text/html
+    public List<Person> testJson() {
+        //Controller-Service-dao
+        //StudetnService studetnService = new StudetnService();
+        //List<Student> students = studetnService.queryAllStudent();
+        //模拟调用service的查询操作
+
+        Person person1 = new Person(1,"zs",23);
+        Person person2 = new Person(2,"ls",24);
+        Person person3 = new Person(3,"ww",25);
+        Person person4 = new Person(4,"zl",26);
+        List<Person> persons = new ArrayList<>();
+        persons.add(person1);
+        persons.add(person2);
+        persons.add(person3);
+        persons.add(person4);
+
+        return persons;//返回给Ajax，以Json数组的形式返回给Ajax的result.
     }
 }

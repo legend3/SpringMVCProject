@@ -2,6 +2,23 @@
 <html>
   <head>
     <title>MvcViewController</title>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#testJson").click(function () {
+          //通过Ajax请求springmvc
+          $.post(
+                  "handler/testJson",//服务器地址
+                  // {"name": "zs"},//{"name": "zs", "age": 23}
+                  function (result) {//服务端处理完毕后的回调函数
+                    for(var i=0;i<result.length;i++) {
+                        alert(result[i].id + "-" + result[i].name + "-" + result[i].age)
+                    }
+                  }
+          );
+        });
+      });
+    </script>
   </head>
   <body>
   <a href="handler/welcome">mapping springmvc - welcome</a>
@@ -88,7 +105,10 @@
     姓名:<input name="stuName" type="text"/>
     年龄:<input name="stuAge" type="text"/>
     出生日期:<input name="stuBirthDate" type="text"/>
+    邮箱:<input name="Email" type="text"/>
     <input type="submit" value="查询"/>
   </form>
+  <br/>
+  <input type="button" value="testJson" id="testJson">
   </body>
 </html>
