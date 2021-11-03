@@ -210,7 +210,7 @@ alert(result[i].id +"-"+result[i].name +"-"+result[i].age);
 > 和Servlet方式的本质一样，都是通过commons-fileupload.jar和commons-io.jar
 SpringMVC可以简化文件上传的代码，但是必须满足条件：实现MultipartResolver接口 ；而该接口的实现类SpringMVC也已经提供了CommonsMultipartResolver
 
-### 具体步骤：（直接使用CommonsMultipartResolver实现上传）
+### 具体步骤：
 1. 导入相关jar包
 - commons-fileupload.jar
 - commons-io.jar 
@@ -218,72 +218,65 @@ SpringMVC可以简化文件上传的代码，但是必须满足条件：实现Mu
   - 将其加入SpringIOC容器
 
 
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-			<property name="defaultEncoding" value="UTF-8"></property>
-			<!-- 上传单个文件的最大值，单位Byte;如果-1，表示无限制 -->
-			<property name="maxUploadSize"  value="102400"></property>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+			<property name="defaultEncoding" value="UTF-8"></property>  
+			<!-- 上传单个文件的最大值，单位Byte;如果-1，表示无限制 -->  
+			<property name="maxUploadSize"  value="102400"></property>  
 	</bean>
 
 3. 处理方法
-//文件上传处理方法
-`@RequestMapping(value="testUpload") //abc.png
-public String testUpload(@RequestParam("desc") String desc  , @RequestParam("file") MultipartFile file  ) throws IOException {
-`
+//文件上传处理方法  
+`@RequestMapping(value="testUpload") //abc.png`    
+`public String testUpload(@RequestParam("desc") String desc  , @RequestParam("file") MultipartFile file  ) throws IOException {`  
             `
-            System.out.println("文件描述信息："+desc);
-            //jsp中上传的文件：file
+            System.out.println("文件描述信息："+desc);`  
+            //jsp中上传的文件：file  
             `
+            InputStream input = file.getInputStream() ;//IO`  
+            `String fileName = file.getOriginalFilename() ;`  
             `
-            InputStream input = file.getInputStream() ;//IO
-            String fileName = file.getOriginalFilename() ;
+            OutputStream out = new FileOutputStream("d:\\"+fileName) ;`  
             `
-            `
-            OutputStream out = new FileOutputStream("d:\\"+fileName) ;
-            `
-            `
-            byte[] bs = new byte[1024];
-            int len = -1;
-            while(( len = input.read(bs)) !=-1 ) {
-                out.write(bs, 0, len);
-            }
-            out.close();
-            input.close();
+            byte[] bs = new byte[1024];`  
+            `int len = -1;`  
+            `while(( len = input.read(bs)) !=-1 ) {`  
+                `out.write(bs, 0, len);`  
+            `}`  
+            `out.close();`  
+            `input.close();`  
             //将file上传到服务器中的 某一个硬盘文件中
-        System.out.println("上传成功！");
-            `
-            `
-            return "success";
-        }
-        `
+        `System.out.println("上传成功！");`
+            `return "success";`  
+        `}`
     
     `<form action="handler/testUpload" method="post"  enctype="multipart/form-data">`  
         `<input type="file" name="file" />`  
-        `描述:<input name="desc" type="text" />`
+        `描述:<input name="desc" type="text" />`  
         `<input type="submit" value="上传">`  
-    `</form>`
+    `</form>`  
 
 > 框架:   将原来自己写的1000行代码，变成：框架帮你写900行，剩下100行自己写
     控制器：handler  servlet   controller   action
 
 ## 拦截器
     拦截器的原理和过滤器相同。
+![拦截器](拦截器.png)
 > SpringMVC：要想实现拦截器，必须实现一个接口HandlerInterceptor
-
 
 - ctrl+shift+r ：自己编写的代码.java  .jsp .html
 - ctrl+shift+t ：jar中的代码
 
-a.编写拦截器implements HandlerInterceptor
-b.配置：将自己写的拦截器 配置到springmvc中（spring）
+1. 编写拦截器implements HandlerInterceptor
+2. 配置：将自己写的拦截器 配置到springmvc中（spring）
+
+### 拦截器串过程
+> 拦截器1拦截请求- 拦截器2拦截请求 - 请求方法 - 拦截器2处理相应-拦截器1处理相应  - 只会被 最后一个拦截器的afterCompletion()拦截
+
+> 如果有多个拦截器，则每个拦截器的preHandle postHandle 都会在相应时机各被触发一次；但是afterCompletion， 只会执行最后一个拦截器的该方法（实际两个皆会触发！！！）。
 
 
-> 拦截器1拦截请求- 拦截器2拦截请求 - 请求方法 - 拦截器2处理相应-拦截器1处理相应-    只会被 最后一个拦截器的afterCompletion()拦截
-
-> 如果有多个拦截器，则每个拦截器的preHandle postHandle 都会在相应时机各被触发一次；但是afterCompletion， 只会执行最后一个拦截器的该方法。
-
-
-3.异常处理
-SpringMVC：  HandlerExceptionResolver接口，
+3. 异常处理
+>SpringMVC：  HandlerExceptionResolver接口，
 
 
 该接口的每个实现类 都是异常的一种处理方式：

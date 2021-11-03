@@ -117,5 +117,9 @@
     描述:<input name="describe" type="text"/>
     <input type="submit" value="上传"/>
   </form>
+  <br/>
+  <%-- 测试拦截器 --%>
+  <a href="/MvcViewController/handler/testInterceptor">测试自定义拦截器</a>
+  </br>
   </body>
 </html>

@@ -208,9 +208,9 @@ throws ServletException, IOException {
 defaultValue="23"：默认值23
 
 2. 获取请求头信息 @RequestHeader  
-public String  testRequestHeader(@RequestHeader("Accept-Language")  String al  ) {
+public String  testRequestHeader(@RequestHeader("Accept-Language")  String al  ) {  
 
-通过@RequestHeader("Accept-Language")  String al   获取请求头中的Accept-Language值，并将值保存再al变量中
+通过@RequestHeader("Accept-Language")  String al   获取请求头中的Accept-Language值，并将值保存再al变量中  
 
 3. 通过mvc获取cookie值（JSESSIONID）  
 @CookieValue  
@@ -236,9 +236,8 @@ System.out.println(request);
 return "success" ;  
 }
 
-
 ## 处理模型数据
->如果跳转时需要带数据：V(视图)、M(数据),则可以使用以下方式：  
+>如果跳转时需要带数据-"让前端页面带上数据"：V(视图)、M(数据),则可以使用以下方式：  
 > 
 ![带数据](模型数据.png)
 >方式：

@@ -9,6 +9,26 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!--  将自己写的拦截器配置到springmvc中(spring);    (preHandle-return false)默认拦截全部请求  -->
+    <mvc:interceptors>
+<!--        <bean id="MyInterceptor" class="org.legend.interceptor.MyInterceptor"/>-->
+        <!--           配置具体的拦截路径     -->
+        <mvc:interceptor>
+            <!--   指定拦截的路径，基于ant风格         -->
+            <mvc:mapping path="/**"/>
+            <!--     指定不拦截的路径         -->
+            <mvc:exclude-mapping path="/handler/testUpload"/>
+            <bean class="org.legend.interceptor.MyInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--   指定拦截的路径，基于ant风格         -->
+            <mvc:mapping path="/**"/>
+            <!--     指定不拦截的路径         -->
+            <mvc:exclude-mapping path="/handler/testUpload"/>
+            <bean class="org.legend.interceptor.MySecondInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- bean扫描器(扫描有注释类的包) -->
     <context:component-scan base-package="org.legend.handler"></context:component-scan>
 
@@ -54,4 +74,5 @@
         <!--   文件上传时最大允许内存      -->
 <!--        <property name="maxInMemorySize" value="2048"/>-->
     </bean>
+
 </beans>
