@@ -121,5 +121,15 @@
   <%-- 测试拦截器 --%>
   <a href="/MvcViewController/handler/testInterceptor">测试自定义拦截器</a>
   </br>
+  </br>
+  <a href="/MvcViewController/second/testExceptionHandler">测试springmvc异常捕获</a>
+  </br>
+  </br>
+  <a href="/MvcViewController/second/testExceptionHandler2">测试springmvc多个异常捕获</a>
+  </br>
+  </br>
+  <a href="/MvcViewController/handler/testException">测试springmvc总异常捕获</a>
+  </br>
+  </br>
   </body>
 </html>

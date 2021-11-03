@@ -274,26 +274,18 @@ SpringMVC可以简化文件上传的代码，但是必须满足条件：实现Mu
 
 > 如果有多个拦截器，则每个拦截器的preHandle postHandle 都会在相应时机各被触发一次；但是afterCompletion， 只会执行最后一个拦截器的该方法（实际两个皆会触发！！！）。
 
-
 3. 异常处理
->SpringMVC：  HandlerExceptionResolver接口，
+>SpringMVC：  HandlerExceptionResolver接口,该接口的每个实现类都是异常的一种处理方式：
+- ExceptionHandlerExceptionResolver: 主要提供了@ExceptionHandler注解，并通过该注解处理异常  
+    //该方法 可以捕获本类中  抛出的ArithmeticException异常
+    
 
-
-该接口的每个实现类 都是异常的一种处理方式：
-
-a.
-ExceptionHandlerExceptionResolver： 主要提供了@ExceptionHandler注解，并通过该注解处理异常
-
-	//该方法 可以捕获本类中  抛出的ArithmeticException异常
-	@ExceptionHandler({ArithmeticException.class,ArrayIndexOutOfBoundsException.class  })
-	public String handlerArithmeticException(Exception e) {
-		System.out.println(e +"============");
-		return "error" ;
-	}
-
-@ExceptionHandler标识的方法的参数 必须在异常类型(Throwable或其子类) ，不能包含其他类型的参数
-
-
+    @ExceptionHandler({ArithmeticException.class,ArrayIndexOutOfBoundsException.class  })
+    public String handlerArithmeticException(Exception e) {
+        System.out.println(e +"============");
+        return "error" ;
+    }
+@ExceptionHandler标识的方法的参数 必须在异常类型(Throwable或其子类) ，不能包含其他类型的参数  
 
 异常处理路径：最短优先  
 如果有方法抛出一个ArithmeticException异常，而该类中 有2个对应的异常处理法你发：

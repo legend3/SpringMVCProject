@@ -248,4 +248,9 @@ public class SpringMvcHandler {
         System.out.println("处理请求的方法....");
         return "success";
     }
+    @RequestMapping(value = "testException")
+    public String testException() {
+        System.out.println(1/0);
+        return "success";
+    }
 }

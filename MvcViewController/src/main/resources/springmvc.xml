@@ -30,7 +30,7 @@
     </mvc:interceptors>
 
     <!-- bean扫描器(扫描有注释类的包) -->
-    <context:component-scan base-package="org.legend.handler"></context:component-scan>
+    <context:component-scan base-package="org.legend.*"></context:component-scan>
 
     <!--  配置解析器  -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
