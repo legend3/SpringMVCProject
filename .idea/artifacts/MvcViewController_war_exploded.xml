@@ -23,12 +23,12 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.11" />
-          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.0" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.4" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.11.0" />
+          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="MvcViewController/web/Web" />

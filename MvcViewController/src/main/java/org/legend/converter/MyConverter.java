@@ -16,9 +16,9 @@ public class MyConverter implements Converter<String, Student> {
         String[] array = source.split("-");
 
         Student student = new Student();
-        student.setStuNo(Integer.parseInt(array[0]));
-        student.setStuName(array[1]);
-        student.setAge(Integer.parseInt(array[2]));
+//        student.setStuNo(Integer.parseInt(array[0]));
+//        student.setStuName(array[1]);
+//        student.setAge(Integer.parseInt(array[2]));
         return student;
     }
 }
