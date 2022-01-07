@@ -55,7 +55,9 @@
 <!--                </set>-->
 <!--            </property>-->
 <!--        </bean>-->
-    <!--  配置 数据格式化 注解 所依赖的bean  -->
+    <!--  配置 数据格式化 注解 所依赖的bean
+            FormattingConversionServiceFactoryBean即包含格式化又包含类型转换ConversionServiceFactoryBean
+      -->
         <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
             <property name="converters">
                 <set>

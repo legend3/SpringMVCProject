@@ -11,7 +11,7 @@ import java.util.logging.SimpleFormatter;
 
 public class MyConverter implements Converter<String, Student> {
     @Override
-    public Student convert(String source) {//source(2-zs-23)字符串转为Student
+    public Student convert(String source) {//source(2-zs-23-2022/01/07)字符串转为Student
         //source接受前端传来的String:2-zs-23
         String[] array = source.split("-");
 

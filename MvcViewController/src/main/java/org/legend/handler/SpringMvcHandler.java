@@ -178,7 +178,7 @@ public class SpringMvcHandler {
     }
     //测试转换器
     @RequestMapping(value="testConverter")
-    public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23
+    public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23-2022/01/07
         System.out.println(student);
         return "success";
     }
