@@ -182,16 +182,16 @@ public class SpringMvcHandler {
         System.out.println(student);
         return "success";
     }
-    //测试数据化
+    //测试数据校验
     @RequestMapping(value="testDateTimeFormat")//如果Student格式化出错，会将错误信息传入result中
     /**
-     * 被校验的属性: Student对象
+     * 被校验的属性: Student对象，给校验的对象前增加 @Valid，就会在对象里的Hibernate Validator注释进行校验
      * BindingResult:发生异常时的错误信息
      * Map:获取请求值传递给HttpServletRequest
      */
-    public String testDateTimeFormat(@Valid Student student, BindingResult result, Map<String, Object> map) {// 前端：2-zs-23
+    public String testDateTimeFormat(@Valid Student student, BindingResult result, Map<String, Object> map) {
         System.out.println(student);
-        if(result.getErrorCount() > 0) {
+        if(result.getErrorCount() > 0) {//错一个框，一个错
             for(FieldError error: result.getFieldErrors()){
                 System.out.println(error);
                 map.put("errors", result.getFieldErrors());//将错误信息传入request域中的errors中
@@ -200,10 +200,10 @@ public class SpringMvcHandler {
         return "success";
     }
     //测试Ajax
-    @ResponseBody//告诉srpigmvc此时的返回不是一个view页面，而是一个Ajax调用的返回值(Json数组)！(谁调就返回给谁，响应给Ajax)
+    @ResponseBody//告诉springmvc此时的返回不是一个view页面，而是一个Ajax调用的返回值(Json数组)！(谁调就返回给谁，响应给Ajax)
     @RequestMapping(value="testJson", method = RequestMethod.POST, produces="application/json")
     //produces: 指定返回的内容类型 ，仅当request请求头中的(Accept)类型中包含该指定类型才返回(本例子要求响应返回json)
-    //补充: consumes: 指定处理请求的 提交内容类型 （Content-Type），例如 application/json, text/html
+    //补充: consumes: 指定处理请求的 提交内容类型(Content-Type)，例如 application/json, text/html
     public List<Person> testJson() {
         //Controller-Service-dao
         //StudetnService studetnService = new StudetnService();
@@ -220,10 +220,10 @@ public class SpringMvcHandler {
         persons.add(person3);
         persons.add(person4);
 
-        return persons;//返回给Ajax，以Json数组的形式返回给Ajax的result.
+        return persons;//返回给Ajax，以Json数组的形式返回给Ajax的result. 响应体为json值！！！扩展一个js、jquey、html
     }
     //测试上传文件
-    @RequestMapping(value = "testUploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "testUploadFile/{filename}", method = RequestMethod.POST)
     public String testUploadFile(@RequestParam("describe") String describe, @RequestParam("file") MultipartFile file) throws IOException {
         System.out.println("文件描述：" + describe);
         //文件上传到硬盘

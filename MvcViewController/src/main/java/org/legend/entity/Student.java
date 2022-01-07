@@ -8,7 +8,7 @@ import javax.validation.constraints.Past;
 import java.util.Date;
 
 public class Student {
-    @NumberFormat(pattern = "###,#")//#:数字，,:占位符
+    @NumberFormat(pattern = "###,#")//#->数字 ,->占位符
     private Integer stuNo;
     private String stuName;
     private int stuAge;

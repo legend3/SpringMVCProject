@@ -9,6 +9,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -90,10 +91,10 @@ public class httpClientTest {
     @Test
     public void testGet02() throws UnsupportedEncodingException {
         /**
-         * 获取网络上的图片并保存到本地
+         * 保存网络上的图片并保存到本地
          */
         CloseableHttpClient closeableHttpClient =  HttpClients.createDefault();
-        String urlStr = "https://www.baidu.com";
+        String urlStr = "http://cd.bendibao.com/images/logo-new.jpg";
         HttpGet httpGet = new HttpGet(urlStr);
         //可关闭的响应
         CloseableHttpResponse response = null;
@@ -102,11 +103,24 @@ public class httpClientTest {
             HttpEntity entity = response.getEntity();
             //通过HttpEntity获取Content-Type
             //image/jpg image/jpeg image/png image/图片后缀
-            entity.getContentType().getValue();
-            String toStringResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-            System.out.println(toStringResult);
+            String contentType = entity.getContentType().getValue();//获取请求是啥Content-Type(内容类型)
+            String suffix = ".jpg";
+            if(contentType.contains("jpg") || contentType.contains("jpeg")) {
+                suffix = ".jpg";
+            } else if(contentType.contains("bmp") || contentType.contains("bitmap")) {
+                suffix = ".bmp";
+            } else if(contentType.contains("png")) {
+                suffix = ".png";
+            } else if(contentType.contains("gif")) {
+                suffix = ".gif";
+            }
+            byte[] bytes = EntityUtils.toByteArray(entity);
+            System.out.println("字节数组: " + bytes.length);
+            String localAbsPath = "d:\\本地宝" + suffix;
+            FileOutputStream fos = new FileOutputStream(localAbsPath);
+            fos.write(bytes);
+            fos.close();
             EntityUtils.consume(entity);
-
         } catch (Exception e) {
             e.getStackTrace();
         } finally {
