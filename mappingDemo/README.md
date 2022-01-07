@@ -137,7 +137,7 @@ return "success" ;
 > 答：不安全
 > 当然，如果您正在编写RESTful服务，并且可以使用这些动词。
 > 
-![过滤处理delete/post请求](result.png)
+![过滤处理delete/post请求](pictures/result.png)
 
 ### springmvc实现 ：put|post请求方式的步骤  
 1. 增加过滤器
@@ -163,7 +163,7 @@ return "success" ;
   - 通过隐藏域 的value值 设置实际的请求方式 DELETE|PUT
   - 无法转发的原因：
     - return "success"; 这种方式是转发，而 DELETE 和 PUT 是不支持转发的，只支持重定向； 所以只需要将这行代码改为：return "redirect:/views/success.jsp"; ，就完成解决了.
-![delete请求抓包图鉴](delete.png)
+![delete请求抓包图鉴](pictures/delete.png)
 
 3 .控制器
 > @RequestMapping(value="testRest/{id}",method=RequestMethod.DELETE)  
@@ -202,7 +202,7 @@ throws ServletException, IOException {
 1. @RequestParam("uname") String name,@RequestParam(value="uage",required=false,defaultValue="23")
   - 请求参数的数量>=方法获取数量
   - 
-  - ![普通风格传值](普通风格传值.png)
+  - ![普通风格传值](pictures/普通风格传值.png)
   - @RequestParam("uname"):接受前台传递的值，等价于request.getParameter("uname");
 >required=false:该属性 不是必须的。
 defaultValue="23"：默认值23
@@ -239,7 +239,7 @@ return "success" ;
 ## 处理模型数据
 >如果跳转时需要带数据-"让前端页面带上数据"：V(视图)、M(数据),则可以使用以下方式：  
 > 
-![带数据](模型数据.png)
+![带数据](pictures/模型数据.png)
 >方式：
 ModelAndView、ModelMap、Map、Model   - 数据放在了request作用域  
 @SessionAttributes、@ModelAttribute  
@@ -313,7 +313,7 @@ public String update()
 
 - 视图的顶级接口:View
 - 视图解析器：ViewResolver
-![View实现类简介](View实现类简介.png)
+![View实现类简介](pictures/View实现类简介.png)
 
 
 
@@ -337,7 +337,7 @@ resource.welcome=你好
 resource.exist=退出  
 i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.properties)中找不到相应的key，就会默认到此文件中找)
 
-![常见的资源文件命名](常见的资源文件命名.png)
+![常见的资源文件命名](pictures/常见的资源文件命名.png)
 
 
 #### 具体实现国际化步骤：
@@ -357,15 +357,15 @@ i18n.properties  默认的国际化文件(指定的文件(例如，i18n_zh_CH.pr
 >jstl.jar  standard.jar
 >注意事项：
 1. Tocmat的conf目录 需要默认配置：  
-> ![img_1.png](Tomcat默认配置.png)  
+> ![img_1.png](pictures/Tomcat默认配置.png)  
 2. idea自动装ASC码开启：  
 >File -> Settings -> Editor -> File Encodings -> 勾选 Transparent navite-to-ascii conversion
 (注：配置之后，你把文件的内容，复制出来保存，再粘贴进去。此时，你用记事本或这NodePad++打开，可以看到已经转码了。哈哈)
-![img.png](idea开启自动转ascll码.png)
+![img.png](pictures/idea开启自动转ascll码.png)
 
 3. (响应时)spring调用ResourceBundleMessageSource进行国际化解析
    - springmvc在启动时，会自动查找一个id="messageSource"的bean，如果有则自动加载  
-   - ![国际化](视图解析器流程.png)
+   - ![国际化](pictures/视图解析器流程.png)
    - jstl包用2011的
 
     

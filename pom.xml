@@ -8,11 +8,14 @@
     <artifactId>SpringMVCProject</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>firstDemo</module>
+        <module>mappingDemo</module>
         <module>MvcViewController</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
@@ -29,7 +32,7 @@
                 <artifactId>spring-context</artifactId>
                 <version>5.3.11</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+            
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
@@ -157,7 +160,17 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.11.0</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.13</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

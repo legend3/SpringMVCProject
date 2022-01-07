@@ -11,8 +11,8 @@
     <fmt:message key="resource.welcome"></fmt:message>
     <fmt:message key="resource.exists"></fmt:message>
     <br/>
-    welcome to springMVC
-    ==== request:<br/>
+    welcome to springMVC ==== request:
+    <br/>
     ${requestScope.studentModelAndView.stuNo} - ${requestScope.studentModelAndView.stuName}
     <br/>
     ${requestScope.studentModelMap.stuNo} - ${requestScope.studentModelMap.stuName}

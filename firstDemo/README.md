@@ -1,4 +1,12 @@
-# springmvc:
+# springmvc: 
+> springmvc主要负责Controller层！  
+org.xxx.servlet  
+org.xxx.controller  
+org.xxx.handler  
+org.xxx.action  
+.....  
+都是指后台(Servlet组件环节)controller层  
+
 1. jar
 - spring-aop.jar
 - spring-bean.jar
@@ -91,10 +99,7 @@ url
     - b.没有age
     !name2  ：不能name="name2"的属性
 
-
-
-
-
+      
 ant风格的请求路径
 ?  单字符
 *  任意个字符（0或多个）

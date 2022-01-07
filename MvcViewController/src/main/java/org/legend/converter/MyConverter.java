@@ -4,6 +4,11 @@ package org.legend.converter;
 import org.legend.entity.Student;
 import org.springframework.core.convert.converter.Converter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
+
 public class MyConverter implements Converter<String, Student> {
     @Override
     public Student convert(String source) {//source(2-zs-23)字符串转为Student

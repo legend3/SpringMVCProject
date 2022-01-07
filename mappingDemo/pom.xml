@@ -54,7 +54,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
@@ -73,7 +73,6 @@
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>

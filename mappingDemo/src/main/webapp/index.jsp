@@ -59,7 +59,10 @@
     <input type="submit" value="学生信息查询"/>
 </form>
 </br>
-<a href="/mappingDemo/handler/testServletAPI">springmvc直接使用servletapi</a>
+<form action="/mappingDemo/handler/testServletAPI">
+    springmvc直接使用servletapi获取请求参数: <input type="text" name="uname">
+    <input type="submit" value="获取">
+</form>
 </br>
 </br>
 <a href="/mappingDemo/handler/testModelAndView">测试ModelAndView给响应页面带入数据</a>

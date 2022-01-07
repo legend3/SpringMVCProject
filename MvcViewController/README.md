@@ -2,7 +2,7 @@
 ##之前内容的概述:
 >InternalResourceViewResolver其他功能：  
 
-1. <mvc:view-controller ...>  
+1. <mvc:view-controller ...>
 index.jsp -> Controller(@RequsetMapping("a")) ->succes.jsp
 
 ## 省略Controller(@RequsetMapping("a"))
@@ -38,7 +38,7 @@ index.jsp -> Controller(@RequsetMapping("a")) ->succes.jsp
         <servlet-name>abc</servlet-name>
         <url-pattern>/abc</url-pattern>
     </servlet-mapping>
-![静态资源处理Tomcat配置](MvcViewController/静态资源处理Tomcat配置.png)
+![静态资源处理Tomcat配置](pictures/静态资源处理Tomcat配置.png)
 
 >解决静态资源方案：如果有springmvc对应的@requestMapping则交给spring处理；如果没有对应@requestMapping,则交给服务器tomcat默认的servlet去处理  ：实现方法，只需要增加2个注解即可 springmvc.xml:  
 <mvc:default-servlet-handler></mvc:default-servlet-handler>
@@ -57,7 +57,7 @@ public String  testDelete(@PathVariable("id") String id) ，即可以接受int�
 
 b.可以自定义类型转换器(将jsp提供的请求数据中获取字符串到srpingmvc中获取到一个student！)  
 i.编写 自定义类型转器的类 （实现Converter接口）  
-![类型转换](MvcViewController/类型转换.png)
+![类型转换](pictures/类型转换.png)
 
     public class MyConverter  implements Converter<String,Student>{
         @Override
@@ -126,14 +126,14 @@ b.通过注解使用
 - (前端显示错误信息)如果要将控制台的错误消息 传到jsp中显示，则可以将 错误消息对象放入request域中，然后 在jsp中 从request中获取。
 
 > 注:后续通过maven导入jstsl包，可能没有导出Tomcat的lib中可以在Artifact中检查WEB-INF/lib;如果没有则在Artifact中重新部署项目包！
-![jstl包导入](MvcViewController/jstl包导入.png)
+![jstl包导入](pictures/jstl包导入.png)
 
 
 2. 数据校验
 - JSR303
-![JSR303注解表](MvcViewController/JSR303注解表.png)
+![JSR303注解表](pictures/JSR303注解表.png)
 - Hibernate Validator:包含JSR303,是对JSR303的扩展
-![HibernateValidator注解表](MvcViewController/HibernateValidator.png)
+![HibernateValidator注解表](pictures/HibernateValidator.png)
 
 使用Hibernate Validator步骤：
 
@@ -171,7 +171,7 @@ a.导入相关jar
 
 b.
 >@ResponseBody修饰的方法，会将该方法的返回值 以一个json数组的形式返回给前台
-![Ajax接收图鉴](Ajax接收图鉴.png)
+![Ajax接收图鉴](pictures/Ajax接收图鉴.png)
 
 `@ResponseBody//告诉SpringMVC，此时的返回 不是一个 View页面，而是一个 ajax调用的返回值（Json数组）  
 @RequestMapping(value="testJson")  
@@ -226,7 +226,7 @@ SpringMVC可以简化文件上传的代码，但是必须满足条件：实现Mu
 
 3. 处理方法
 //文件上传处理方法  
-`@RequestMapping(value="testUpload") //abc.png`    
+`@RequestMapping(value="testUpload") //upload.png`    
 `public String testUpload(@RequestParam("desc") String desc  , @RequestParam("file") MultipartFile file  ) throws IOException {`  
             `
             System.out.println("文件描述信息："+desc);`  
@@ -260,7 +260,7 @@ SpringMVC可以简化文件上传的代码，但是必须满足条件：实现Mu
 
 ## 拦截器
     拦截器的原理和过滤器相同。
-![拦截器](拦截器.png)
+![拦截器](pictures/拦截器.png)
 > SpringMVC：要想实现拦截器，必须实现一个接口HandlerInterceptor
 
 - ctrl+shift+r ：自己编写的代码.java  .jsp .html

@@ -48,25 +48,26 @@
     <!-- 1.将 自定义转换器 纳入SpringIOC容器 -->
     <bean  id="myConverter" class="org.legend.converter.MyConverter"></bean>
     <!-- 2.将myConverter再纳入 SpringMVC提供的转换器Bean  -->
-    <!--    <bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">-->
-    <!--        <property name="converters">-->
-    <!--            <set>-->
-    <!--                <ref bean="myConverter"/>-->
-    <!--            </set>-->
-    <!--        </property>-->
-    <!--    </bean>-->
+<!--        <bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+<!--            <property name="converters">-->
+<!--                <set>-->
+<!--                    <ref bean="myConverter"/>-->
+<!--                </set>-->
+<!--            </property>-->
+<!--        </bean>-->
+    <!--  配置 数据格式化 注解 所依赖的bean  -->
+        <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+            <property name="converters">
+                <set>
+                    <ref bean="myConverter"/>
+                </set>
+            </property>
+        </bean>
     <!-- 3.将conversionService注册到annotation-driven中 -->
-    <!--此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
+    <!--    此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  -->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
-    <!--    -->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <ref bean="myConverter"/>
-            </set>
-        </property>
-    </bean>
+    <!--  配置文件解析器对象  -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
         <!-- 上传单个文件的最大值，单位Byte;如果-1，表示无限制 -->

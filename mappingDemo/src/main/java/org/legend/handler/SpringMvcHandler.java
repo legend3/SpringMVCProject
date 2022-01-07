@@ -1,6 +1,5 @@
 package org.legend.handler;
 
-
 import org.legend.entity.Address;
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
@@ -76,7 +75,9 @@ public class SpringMvcHandler {
     }
     //普通风格-获取请求参数值
     @RequestMapping(value="testParam")
-    public String  testParam(@RequestParam("uname") String name, @RequestParam(value = "uage", required = false, defaultValue = "23") Integer age) {//普通风格传值用@RequestParam
+    public String  testParam(@RequestParam("uname") String name,
+                             @RequestParam(value = "uage", required = false,
+                                     defaultValue = "23") Integer age) {//普通风格传值用@RequestParam
 //        String name = request.getParameter("uname");
         System.out.println(name);
         System.out.println(age);
@@ -102,9 +103,8 @@ public class SpringMvcHandler {
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     @RequestMapping(value="testServletAPI")
-    public String  testServletAPI(HttpServletRequest request, HttpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
-//        String name = request.getParameter("uname");
-        System.out.println(request);
+    public String  testServletAPI(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println(request.getParameter("uname"));
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     @RequestMapping(value="testModelAndView")
@@ -146,7 +146,7 @@ public class SpringMvcHandler {
         return "success";
     }
 
-    @ModelAttribute//在任何一次请求前，都会执行@ModelAttribute修饰的方法
+    @ModelAttribute//在任何一次(有参数@ModelAttribute的)请求前，都会执行@ModelAttribute修饰的方法
     //在请求该类的各个方法前，均被执行的涉及是基于一个思想：一个控制器 只做一个功能
     public void queryStudentById(Map<String, Object> m) {
         //模拟调用三层查询数据库的操作(好比这些是从数据库中查询到的一条student数据)

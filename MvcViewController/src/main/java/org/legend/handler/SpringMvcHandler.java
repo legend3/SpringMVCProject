@@ -1,6 +1,5 @@
 package org.legend.handler;
 
-
 import org.legend.entity.Person;
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
@@ -80,15 +79,15 @@ public class SpringMvcHandler {
         return "redirect:/views/success.jsp" ;//put在Tomcat7以上都只能重定向，转发：405
     }
     @RequestMapping(value="testRest/{id}", method = RequestMethod.GET)//Restful风格传值用@PathVariable
-    public String  testGet(@PathVariable("id") Integer id) {
-        System.out.println("get值:" + id);
+    public String  testGet(@PathVariable("id") String id) {
+        System.out.println("get值: " + id);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     //普通风格-获取请求参数值
     @RequestMapping(value="testParam")
     public String  testParam(@RequestParam("uname") String name, @RequestParam(value = "uage", required = false, defaultValue = "23") Integer age) {//普通风格传值用@RequestParam
 //        String name = request.getParameter("uname");
-        System.out.println(name);
+        System.out.println("获取请求参数name:" + name);
         System.out.println(age);
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }

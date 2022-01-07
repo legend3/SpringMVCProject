@@ -57,9 +57,9 @@
   </form>
   <%--  普通风格  --%>
   <form action="/MvcViewController/handler/testParam" method="get">
-    name:<input name="uname" type="text">
+    获取请求参数name: <input name="uname" type="text">
     <%--    age:<input name="uage" type="text">--%>
-    <input type="submit" value="查"/>
+    <input type="submit" value="获取"/>
   </form>
   <%--  普通风格-获取请求头信息  --%>
   <a href="/MvcViewController/handler/testRequestHeader">获取请求头信息值</a>
@@ -93,12 +93,12 @@
   </form>
   </br>
 <%-- 测试静态资源 --%>
-  <a href="MvcViewController/handler/testMvcViewController">testMvcViewController</a>
+  <a href="/handler/testMvcViewController">testMvcViewController</a>
   </br>
 <%-- 测试类型转换器 --%>
   <form action="/MvcViewController/handler/testConverter" method="post">
     学号信息:<input name="studentInfo" type="text"/>
-    <input type="submit" value="查询"/>
+    <input type="submit" value="自定义转换器"/>
   </form>
   <form action="/MvcViewController/handler/testDateTimeFormat" method="post">
     学号:<input name="stuNo" type="text"/>
