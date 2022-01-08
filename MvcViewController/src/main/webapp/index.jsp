@@ -33,7 +33,7 @@
   <br/>
   <a href="handler/welcome6/zs">666 welcome - welcome</a>
   <br/>
-  <form action="/MvcViewController/handler/welcome" method="post">
+  <form action="handler/welcome" method="post">
     name:<input name="name" ><br/>
     age:<input name="age" >
     <%--    height:<input name="height" >--%>
@@ -41,32 +41,32 @@
   </form>
 
   <%--  rest风格——四种请求方式，其中delete/put需要通过过滤器配置再处理  --%>
-  <form action="/MvcViewController/handler/testRest/1234" method="post">
+  <form action="handler/testRest/1234" method="post">
     <input type="submit" value="增"/>
   </form>
-  <form action="/MvcViewController/handler/testRest/1234" method="post">
+  <form action="handler/testRest/1234" method="post">
     <input type="hidden"  name="_method" value="DELETE"/>
     <input type="submit" value="删"/>
   </form>
-  <form action="/MvcViewController/handler/testRest/1234" method="post">
+  <form action="handler/testRest/1234" method="post">
     <input type="hidden" name="_method" value="PUT"/>
     <input type="submit" value="改"/>
   </form>
-  <form action="/MvcViewController/handler/testRest/1234" method="get">
+  <form action="handler/testRest/1234" method="get">
     <input type="submit" value="查"/>
   </form>
   <%--  普通风格  --%>
-  <form action="/MvcViewController/handler/testParam" method="get">
+  <form action="handler/testParam" method="get">
     获取请求参数name: <input name="uname" type="text">
     <%--    age:<input name="uage" type="text">--%>
     <input type="submit" value="获取"/>
   </form>
   <%--  普通风格-获取请求头信息  --%>
-  <a href="/MvcViewController/handler/testRequestHeader">获取请求头信息值</a>
+  <a href="handler/testRequestHeader">获取请求头信息值</a>
   <br/>
-  <a href="/MvcViewController/handler/testCookie">获取JSESSIONID</a>
+  <a href="handler/testCookie">获取JSESSIONID</a>
 
-  <form method="post" action="/MvcViewController/handler/testObjectProperties">
+  <form method="post" action="handler/testObjectProperties">
     <%--  属性必须和form表单中的属性Name值  --%>
     学号：<input type="text" name="stuNo"/>
     学生姓名：<input type="text" name="stuName"/>
@@ -76,31 +76,31 @@
     <input type="submit" value="学生信息查询"/>
   </form>
   </br>
-  <a href="/MvcViewController/handler/testServletAPI">springmvc直接使用servletapi</a>
+  <a href="handler/testServletAPI">springmvc直接使用servletapi</a>
   </br>
   </br>
-  <a href="/MvcViewController/handler/testModelAndView">测试ModelAndView给响应页面带入数据</a>
+  <a href="handler/testModelAndView">测试ModelAndView给响应页面带入数据</a>
   </br>
-  <a href="/MvcViewController/handler/testModelMap">测试ModelMap给响应页面带入数据</a>
+  <a href="handler/testModelMap">测试ModelMap给响应页面带入数据</a>
   </br>
-  <a href="/MvcViewController/handler/testMap">测试Map给响应页面带入数据</a>
+  <a href="handler/testMap">测试Map给响应页面带入数据</a>
   </br>
-  <a href="/MvcViewController/handler/testModel">测试Model给响应页面带入数据</a>
-  <form action="/MvcViewController/handler/testModelAttribute" method="post">
+  <a href="handler/testModel">测试Model给响应页面带入数据</a>
+  <form action="handler/testModelAttribute" method="post">
     学号：<input name="stuNo" type="hidden" value="31">
     名字：<input name="stuName" type="text">
     <input type="submit" value="修改">
   </form>
   </br>
-<%-- 测试静态资源 --%>
-  <a href="/handler/testMvcViewController">testMvcViewController</a>
+<%-- 测试无需@RequestMapping拦截,直接通过mvc实现从index.jsp->success.jsp --%>
+  <a href="handler/testMvcViewController">testMvcViewController</a>
   </br>
 <%-- 测试类型转换器 --%>
-  <form action="/MvcViewController/handler/testConverter" method="post">
+  <form action="handler/testConverter" method="post">
     学号信息:<input name="studentInfo" type="text"/>
     <input type="submit" value="自定义转换器"/>
   </form>
-  <form action="/MvcViewController/handler/testDateTimeFormat" method="post">
+  <form action="handler/testDateTimeFormat" method="post">
     学号:<input name="stuNo" type="text"/>
     姓名:<input name="stuName" type="text"/>
     年龄:<input name="stuAge" type="text"/>
@@ -112,14 +112,14 @@
   <input type="button" value="testJson" id="testJson">
   <br/>
   <br/>
-  <form action="/MvcViewController/handler/testUploadFile" method="post" enctype="multipart/form-data">
+  <form action="handler/testUploadFile" method="post" enctype="multipart/form-data">
     <input name="file" type="file"/>
     描述:<input name="describe" type="text"/>
     <input type="submit" value="上传"/>
   </form>
   <br/>
   <%-- 测试拦截器 --%>
-  <a href="/MvcViewController/handler/testInterceptor">测试自定义拦截器</a>
+  <a href="handler/testInterceptor">测试自定义拦截器</a>
   </br>
   </br>
   <a href="/MvcViewController/second/testExceptionHandler">测试springmvc异常捕获</a>
@@ -128,7 +128,7 @@
   <a href="/MvcViewController/second/testExceptionHandler2">测试springmvc多个异常捕获</a>
   </br>
   </br>
-  <a href="/MvcViewController/handler/testException">测试springmvc总异常捕获</a>
+  <a href="handler/testException">测试springmvc总异常捕获</a>
   </br>
   </br>
   </body>

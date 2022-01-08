@@ -141,6 +141,11 @@ public class SpringMvcHandler {
     }
     @RequestMapping(value="testMap")
     public String testMap(Map<String, Object> m) {
+        try {
+            Thread.sleep(6000);//延迟响应时间，测试httpCLient的setSocketTimeout()
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Student student = new Student();
         student.setStuNo(2);
         student.setStuName("lilei");
@@ -223,7 +228,7 @@ public class SpringMvcHandler {
         return persons;//返回给Ajax，以Json数组的形式返回给Ajax的result. 响应体为json值！！！扩展一个js、jquey、html
     }
     //测试上传文件
-    @RequestMapping(value = "testUploadFile/{filename}", method = RequestMethod.POST)
+    @RequestMapping(value = "testUploadFile", method = RequestMethod.POST)
     public String testUploadFile(@RequestParam("describe") String describe, @RequestParam("file") MultipartFile file) throws IOException {
         System.out.println("文件描述：" + describe);
         //文件上传到硬盘

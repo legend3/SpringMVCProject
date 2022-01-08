@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MyException {//不是控制器，仅仅是用于处理异常
     @ExceptionHandler(ArithmeticException.class)
     public ModelAndView handlerArithmeticException(Exception e) {
-        System.out.println(e + "======" + "g该@ControllerAdvice中的异常处理方法，可以处理任何类中的异常");
+        System.out.println(e + "======" + "该@ControllerAdvice中的异常处理方法，可以处理任何类中的异常");
         ModelAndView mv = new ModelAndView("error");
         mv.addObject("e", e);
         return mv;

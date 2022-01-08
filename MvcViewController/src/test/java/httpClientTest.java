@@ -1,9 +1,9 @@
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
+import org.apache.http.*;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -115,7 +115,7 @@ public class httpClientTest {
                 suffix = ".gif";
             }
             byte[] bytes = EntityUtils.toByteArray(entity);
-            System.out.println("字节数组: " + bytes.length);
+//            System.out.println("字节数组大小: " + bytes.length);
             String localAbsPath = "d:\\本地宝" + suffix;
             FileOutputStream fos = new FileOutputStream(localAbsPath);
             fos.write(bytes);
@@ -139,5 +139,68 @@ public class httpClientTest {
                 }
             }
         }
+    }
+    @Test
+    public void testGet03() {
+        /**
+         * 1.设置访问代理:    避同一ip高频率的访问被网站安全机制封掉ip，可以配置代理ip，"一会儿用这个，一会儿用那个"避免被封！
+         * 2.连接超时和读取超时
+         */
+        CloseableHttpClient client = HttpClients.createDefault();
+        String urlStr = "http://localhost:8080/MvcViewController/handler/testMap";
+        HttpGet httpGet = new HttpGet(urlStr);
+        //创建一个代理
+        String ip = "165.225.194.101";
+        int port = 10605;
+        HttpHost proxy = new HttpHost(ip, port);
+        //对每一个请求进行配置，会覆盖全局的默认请求配置
+        RequestConfig requestConfig = RequestConfig.custom()
+//                        .setProxy(proxy)
+                //设置超时时间,ms，完成tcp3次握手的时间上限
+//                .setConnectTimeout(30000)
+                //读取超时，m，从请求的网址获得响应数据的时间间隔
+                .setSocketTimeout(3000)
+                //指的从连接池里面获取connection的超时时间
+//                .setConnectionRequestTimeout(100)
+                .build();
+        httpGet.setConfig(requestConfig);
+
+        CloseableHttpResponse response = null;
+        try {
+            response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            String toStringResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            System.out.println(toStringResult);
+            EntityUtils.consume(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Test
+    public void TestPost_MIME() {
+        CloseableHttpClient client = HttpClients.createDefault();
+        String urlStr = "http://localhost:8080/MvcViewController/handler/testUploadFile/faceboot.jpg";
+        //创建httpPost对象
+        HttpPost httpPost = new HttpPost(urlStr);
+        //给post对象设置参数
+        /*
+            NameValuePair: <>
+         */
+        
+        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(null, Consts.UTF_8);
+//        httpPost.setEntity();
+
+        CloseableHttpResponse response = null;
+        try {
+            response = client.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            String toStringResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            System.out.println(toStringResult);
+            EntityUtils.consume(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

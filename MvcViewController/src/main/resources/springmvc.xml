@@ -11,20 +11,20 @@
 
     <!--  将自己写的拦截器配置到springmvc中(spring);    (preHandle-return false)默认拦截全部请求  -->
     <mvc:interceptors>
-<!--        <bean id="MyInterceptor" class="org.legend.interceptor.MyInterceptor"/>-->
         <!--           配置具体的拦截路径     -->
         <mvc:interceptor>
             <!--   指定拦截的路径，基于ant风格         -->
             <mvc:mapping path="/**"/>
             <!--     指定不拦截的路径         -->
-            <mvc:exclude-mapping path="/handler/testUpload"/>
+            <mvc:exclude-mapping path="/handler/testUploadFile"/>
+<!--    必须要放最后        -->
             <bean class="org.legend.interceptor.MyInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <!--   指定拦截的路径，基于ant风格         -->
             <mvc:mapping path="/**"/>
             <!--     指定不拦截的路径         -->
-            <mvc:exclude-mapping path="/handler/testUpload"/>
+            <mvc:exclude-mapping path="/handler/testUploadFile"/>
             <bean class="org.legend.interceptor.MySecondInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
@@ -38,12 +38,17 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!--  无需@RequestMapping拦截  -->
-    <mvc:view-controller path="MvcViewController/handler/testMvcViewController" view-name="success"/>
+    <!--  直接通过mvc实现从index.jsp->success.jsp(无需@RequestMapping拦截)view-name会被视图解析器 加上前缀、后缀
+           场景:  适用于映射静态资源
+      -->
+    <mvc:view-controller path="handler/testMvcViewController" view-name="success"/>
+
     <!--    此配置时springmvc的基础配置，很多功能都需要通过该注解来协调;不然之前的@RequestMapping会失效    -->
     <mvc:annotation-driven></mvc:annotation-driven>
+
     <!-- 该注解 会让 springmvc： 接收一个请求，并且该请求 没有对应的@requestmapping时，将该请求 交给服务器默认的servlet去处理（直接访问）  -->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
 
     <!-- 1.将 自定义转换器 纳入SpringIOC容器 -->
     <bean  id="myConverter" class="org.legend.converter.MyConverter"></bean>

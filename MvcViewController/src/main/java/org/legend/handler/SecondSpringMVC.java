@@ -32,6 +32,7 @@ public class SecondSpringMVC {
 //        System.out.println(e);
 //        return "error";
 //    }
+    //这个类中异常bean与MyException.java中的异常bean都会在容器中，因此每个异常请求都会触发这个两个异常bean
     @ExceptionHandler({ArithmeticException.class, ArrayIndexOutOfBoundsException.class})//数学异常、越界异常
     public ModelAndView handlerArithmeticException(Exception e) {//多个一起收;(只能有e参数！)
         System.out.println("异常 :" + e);

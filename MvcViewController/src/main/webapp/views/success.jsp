@@ -5,9 +5,9 @@
     <title>success</title>
 </head>
 <body>
-    <c:forEach items="${requestScope.errors}" var="error">
-        ${error.getDefaultMessage()}<br/>
-    </c:forEach>
+<%--    <c:forEach items="${requestScope.errors}" var="error">--%>
+<%--        ${error.getDefaultMessage()}<br/>--%>
+<%--    </c:forEach>--%>
 
     <br/>
     welcome to springMVC
