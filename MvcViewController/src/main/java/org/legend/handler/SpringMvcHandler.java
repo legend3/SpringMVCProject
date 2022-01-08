@@ -36,7 +36,8 @@ import java.util.Map;
 @RequestMapping(value="handler")
 public class SpringMvcHandler {
     //是去匹配@RequestMapping注解，可以和方法名、类名不一致
-    @RequestMapping(value="welcome", method = RequestMethod.POST, params = {"name=zs", "age!=23", "!height"})//映射
+    //params指定参数条件才能被接收
+    @RequestMapping(value="welcome", method = RequestMethod.POST, params = {"name=zs", "age!=23", "!height"})
     public String welcome(){
         return "success";//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
@@ -111,9 +112,11 @@ public class SpringMvcHandler {
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     @RequestMapping(value="testServletAPI")
+    //request: 获取请求的信息
+    //response: 获取响应的信息
     public String  testServletAPI(HttpServletRequest request, HttpServletResponse response) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
 //        String name = request.getParameter("uname");
-        System.out.println(request);
+        System.out.println(response);
         return "success";//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
     //给响应页面带入值
