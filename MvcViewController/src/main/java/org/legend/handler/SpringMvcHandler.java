@@ -112,7 +112,6 @@ public class SpringMvcHandler {
 //        String name = request.getParameter("uname");
         System.out.println("学生: " + student);
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-        System.out.println(httpServletRequest.getHeader("Content-Type"));
         while(headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
@@ -125,7 +124,6 @@ public class SpringMvcHandler {
 //        String name = request.getParameter("uname");
         System.out.println("学生: " + student);
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-        System.out.println(httpServletRequest.getHeader("Content-Type"));
         while(headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
