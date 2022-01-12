@@ -91,7 +91,7 @@ i.编写 自定义类型转器的类 （实现Converter接口）
    - 此配置是SpringMVC的基础配置，很功能都需要通过该注解来协调  
    `<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>`
 
-4. 测试转换器:
+4. 测试转换器:  
 `@RequestMapping(value="testConverter")  
 public String testConverter(@RequestParam("studentInfo")  Student student) {// 前端：2-zs-23  
             System.out.println(student.getId()+","+student.getName()+","+student.getAge());  
@@ -203,6 +203,10 @@ alert(result[i].id +"-"+result[i].name +"-"+result[i].age);
 }  
 }  
 );`
+
+c.@RequestBody
+> https://blog.csdn.net/justry_deng/article/details/80972817
+
 
 ## SpringMVC实现文件上传：
 > ——前提  

@@ -1,11 +1,16 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.http.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
@@ -14,6 +19,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class httpClientTest {
     @Test
@@ -178,18 +185,29 @@ public class httpClientTest {
 
     }
     @Test
-    public void TestPost_MIME() {
+    public void TestPost01() {
+        /**
+         * 发送application/x-www-form-urlencoded类型的post请求
+         */
         CloseableHttpClient client = HttpClients.createDefault();
-        String urlStr = "http://localhost:8080/MvcViewController/handler/testUploadFile/faceboot.jpg";
+        String urlStr = "http://localhost:8080/MvcViewController/handler/testObjectProperties";
         //创建httpPost对象
         HttpPost httpPost = new HttpPost(urlStr);
+        //设置请求头
+        httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         //给post对象设置参数
         /*
-            NameValuePair: <>
+            NameValuePair:  <input type="text" name="stuNo"/>的name(stuNo)和input标签里面输入的值就构成了一个NameValuePair对象
+            实现类:    BasicNameValuePair
          */
-        
-        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(null, Consts.UTF_8);
-//        httpPost.setEntity();
+        List<NameValuePair> list = new ArrayList<>();
+        list.add(new BasicNameValuePair("stuNo", "1"));
+        list.add(new BasicNameValuePair("stuName", "李振国"));
+        list.add(new BasicNameValuePair("address.schoolAddress", "杭州中学"));
+        list.add(new BasicNameValuePair("address.homeAddress", "古翠路"));
+        //把参数集合设置到formEntity
+        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(list, Consts.UTF_8);
+        httpPost.setEntity(formEntity);//设置成httpPost的属性
 
         CloseableHttpResponse response = null;
         try {
@@ -201,6 +219,45 @@ public class httpClientTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void TestPost02() {
+        /**
+         * 发送application/json类型的post请求
+         */
+        CloseableHttpClient client = HttpClients.createDefault();
+        String urlStr = "http://localhost:8080/MvcViewController/handler/testJsonObjectProperties";
+        //配置fiddler代理
+        RequestConfig requestConfig = RequestConfig.custom().setProxy(HttpHost.create("127.0.0.1:8888")).build();
+        //创建httpPost对象
+        HttpPost httpPost = new HttpPost(urlStr);
+        //添加代理
+        httpPost.setConfig(requestConfig);
+        //string: 是一个json字符串
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode jsonObj = mapper.createObjectNode();
+        jsonObj.put("stuNo","1");
+        jsonObj.put("stuName", "李振国");
+        jsonObj.put("address.schoolAddress", "杭州中学");
+        jsonObj.put("address.homeAddress", "古翠路");
 
+        /*  配置Entity的属性*/
+        StringEntity jsonEntity = new StringEntity(jsonObj.toPrettyString(), Consts.UTF_8);
+        //也需要给entity设置内容类型
+        jsonEntity.setContentType(new BasicHeader("Content-Type", "application/json; charset=utf-8"));
+        //设置entity的编码格式
+        jsonEntity.setContentEncoding(Consts.UTF_8.name());
+        httpPost.setEntity(jsonEntity);//设置成httpPost的属性
+
+        CloseableHttpResponse response = null;
+        try {
+            response = client.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            String toStringResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            System.out.println(toStringResult);
+            EntityUtils.consume(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
