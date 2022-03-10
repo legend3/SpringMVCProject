@@ -119,8 +119,9 @@ public class SpringMvcHandler {
         return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
     }
 
+    @ResponseBody
     @RequestMapping(value="testJsonObjectProperties")//(以后补充前端，先用httpclient发送json数据)
-    public String  testJsonObjectProperties(@RequestBody Student student, HttpServletRequest httpServletRequest) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
+    public List<Student>  testJsonObjectProperties(@RequestBody Student student, HttpServletRequest httpServletRequest) {//Student属性必须和form表单中的属性Name值一致(且支持级联属性)
 //        String name = request.getParameter("uname");
         System.out.println("学生: " + student);
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
@@ -128,7 +129,9 @@ public class SpringMvcHandler {
             String headerName = headerNames.nextElement();
             System.out.println(headerName + ": " + httpServletRequest.getHeader(headerName));
         }
-        return "success" ;//  views/success.jsp，默认使用了 请求转发的 跳转方式
+        List<Student> studentInfo = new ArrayList<>();
+        studentInfo.add(student);
+        return studentInfo;
     }
     @RequestMapping(value="testServletAPI")
     //request: 获取请求的信息

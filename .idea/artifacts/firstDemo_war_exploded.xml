@@ -21,8 +21,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.3.11" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.11" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.11" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
         </element>
       </element>
