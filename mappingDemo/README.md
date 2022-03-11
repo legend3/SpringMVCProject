@@ -1,5 +1,5 @@
 ## RequestMapping注解映射(P2、P3、P4、P5、P6、P7)
-- 是去匹配@RequestMapping注解，可以和方法名、类名不一致  
+- (映射)是去匹配@RequestMapping注解，可以和方法名、类名不一致  
 - 通过method指定请求方式(get  post  delete put):  
   - @RequestMapping(value="welcome",method=RequestMethod.POST)//映射  
   
@@ -35,13 +35,13 @@ return "success" ;
 
 
 ## REST风格 ：软件编程风格
-[restful风格](https://blog.csdn.net/qq_27026603/article/details/82012277)
-### Springmvc(主要关注请求方式),四种请求方式:
-- GET  :查
-- POST  ：增
-- DELETE ：删
-- PUT ：改
-> 但是，普通浏览器只支持get post方式；其他请求方式 如,delelte|put请求是通过过滤器新加入的支持。
+[restful风格](https://blog.csdn.net/qq_27026603/article/details/82012277)  
+### Springmvc(主要关注请求方式),四种请求方式:  
+- GET  :查  
+- POST  ：增  
+- DELETE ：删  
+- PUT ：改  
+> 但是，普通浏览器只支持get post方式；其他请求方式 如,delelte|put请求是通过过滤器新加入的支持。  
 > 补充:  
 > 为什么浏览器不支持DELETE和PUT？
 > 答：不安全

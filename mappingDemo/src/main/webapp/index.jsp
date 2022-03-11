@@ -4,6 +4,7 @@
     <title>welcome</title>
 </head>
 <body>
+<%--  默认都是GET请求方式！  --%>
 <a href="handler/welcome">mapping springmvc - welcome</a>
 <br/>
 <a href="handler/welcome2">222 mapping springmvc - welcome</a>

@@ -1,6 +1,6 @@
 package org.legend.handler;
 
-import org.legend.entity.Address;
+
 import org.legend.entity.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +25,10 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="handler")
 public class SpringMvcHandler {
-    //是去匹配@RequestMapping注解，可以和方法名、类名不一致
+    //(拦截请求)映射是去匹配@RequestMapping注解，可以和方法名、类名不一致
     @RequestMapping(value="welcome", method = RequestMethod.POST, params = {"name=zs", "age!=23", "!height"})//映射
     public String welcome(){
-        return "success";//  views/success.jsp，默认使用了 请求转发的 跳转方式
+        return "success";//  views/success.jsp，默认使用了 请求转发的 跳转方式(url不变)
     }
     //验证请求头(接收的请求的请求头键值一定要是指定的)
     @RequestMapping(value="welcome2",headers= {"Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9","Accept-Encoding=gzip, deflate, br"})
